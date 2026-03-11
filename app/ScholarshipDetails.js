@@ -4,7 +4,6 @@ import {
   Bell,
   Building2,
   CheckCircle,
-  Clock,
   MoreVertical,
   Users
 } from 'lucide-react-native';
@@ -90,7 +89,7 @@ const renderCard = ({ item }) => {
                 
                 <View style={[
                   styles.badge, 
-                  { backgroundColor: item.status === 'Approved' ? COLORS.success : COLORS.warning }
+                  { backgroundColor: item.status === 'Approved' ? COLORS.success : COLORS.success }
                 ]}>
                   <Text style={styles.badgeText}>{item.status}</Text>
                 </View>
@@ -106,7 +105,7 @@ const renderCard = ({ item }) => {
               item.status === 'Approved' ? (
                 <CheckCircle color={COLORS.success} size={24} fill="#E8F5E9" />
               ) : (
-                <Clock color={COLORS.warning} size={24} />
+               <CheckCircle color={COLORS.success} size={24} fill="#E8F5E9" />
               )
             )}
           </View>
@@ -160,7 +159,7 @@ const renderCard = ({ item }) => {
           style={[styles.tab, activeTab === 'status' && styles.activeTab]}
           onPress={() => setActiveTab('status')}
         >
-          <Text style={[styles.tabLabel, activeTab === 'status' && styles.activeLabel]}>Application status</Text>
+          <Text style={[styles.tabLabel, activeTab === 'status' && styles.activeLabel]}>Applied</Text>
         </TouchableOpacity>
       </View>
 
@@ -212,7 +211,7 @@ const styles = StyleSheet.create({
   cardHeader: { flexDirection: 'row', position: 'relative' },
   iconBox: { marginRight: 15 },
   infoContainer: { flex: 1 },
-  cardTitle: { fontSize: 18, fontWeight: 'bold', color: '#111', lineHeight: 24, paddingRight: 35 },
+  cardTitle: { fontSize: 16, fontWeight: 'bold', color: '#111', lineHeight: 24, paddingRight: 35 },
   dateText: { color: COLORS.textGray, marginTop: 12, fontSize: 14 },
   
   statusRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 20 },
