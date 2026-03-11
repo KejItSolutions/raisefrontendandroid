@@ -1,11 +1,12 @@
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return (
-    <Stack
+< feature/Scholarship-detail
+  return <Stack
       screenOptions={{
         headerShown: false,
       }}
-    ></Stack>
-  );
+    ></Stack>;
+
+
 }
