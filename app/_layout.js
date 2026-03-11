@@ -1,5 +1,4 @@
 import { Stack } from "expo-router";
-
 export default function RootLayout() {
 < feature/Scholarship-detail
   return <Stack
@@ -10,3 +9,4 @@ export default function RootLayout() {
 
 
 }
+
