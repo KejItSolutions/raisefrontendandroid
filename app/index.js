@@ -1,6 +1,5 @@
 import { View } from "react-native";
-import StudentProfile from "./StudentProfile";
-
+import LoginScreen from "./LoginScreen";
 export default function Index() {
   return (
     <View
@@ -8,7 +7,8 @@ export default function Index() {
         flex: 1,
       }}
     >
-      <StudentProfile />
+      {/* <StudentProfile /> */}
+      <LoginScreen />
     </View>
   );
 }

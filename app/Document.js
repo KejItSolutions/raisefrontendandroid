@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useRouter } from "expo-router"; // ADDED: Import the router
+import { useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   FlatList,
-  TouchableOpacity,
   Image,
-  SafeAreaView,
   Platform,
+  SafeAreaView,
   StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useRouter } from "expo-router"; // ADDED: Import the router
 
 // 1. DYNAMIC DATA STRUCTURE
 // You can easily replace this with data fetched from your backend
@@ -88,7 +88,7 @@ const Documents = () => {
         {/* TOP HEADER */}
         <View style={styles.header}>
           <Image
-            source={require("../assets/images/logo.png")}
+            source={require("../assets/images/Logo.png")}
             style={styles.headerLogo}
             resizeMode="contain"
           />
