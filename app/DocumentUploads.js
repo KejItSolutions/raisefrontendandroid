@@ -71,7 +71,7 @@ export default function DocumentUploads() {
       {/* TOP HEADER */}
       <View style={styles.header}>
         <Image
-          source={require("../assets/images/logo.png")}
+          source={require("../assets/images/Logo.png")}
           style={styles.headerLogo}
           resizeMode="contain"
         />
@@ -167,10 +167,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
   },
-  headerLogo:{
-    height:50,
-    width:50,
-    
+  headerLogo: {
+    height: 50,
+    width: 50,
   },
   headerRight: {
     flexDirection: "row",
@@ -190,7 +189,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   scrollContent: {
-    paddingBottom: 100, 
+    paddingBottom: 100,
   },
   titleSection: {
     marginBottom: 20,
@@ -244,16 +243,15 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     elevation: 4,
-    shadowColor: '#448AFF', 
-    shadowOffset: { width: 0, height: 4 }, 
-    shadowOpacity: 0.3, 
+    shadowColor: "#448AFF",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
     shadowRadius: 8,
   },
   fetchButtonText: {
     color: "#FFFFFF",
     fontWeight: "600",
     fontSize: 14,
-    
   },
   sectionHeading: {
     fontSize: 16,
