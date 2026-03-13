@@ -1,73 +1,165 @@
-import { useEffect, useState } from 'react';
+
+import { useEffect, useState, useRef } from 'react';
 import {
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
+  Image
 } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from "expo-linear-gradient";
-import { Image } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
-
+import { useRouter } from "expo-router";
 
 export default function RegistrationScreen() {
 
+  const router = useRouter();
+
+  // Student details
+  const [studentId, setStudentId] = useState("");
+  const [studentName, setStudentName] = useState("");
+  const [email, setEmail] = useState("");
+  const [birthday, setBirthday] = useState("");
+
+  const [studentPhone, setStudentPhone] = useState("");
+
+  // Parent details
+  const [parentName, setParentName] = useState("");
+  const [relationship, setRelationship] = useState("father");
+  const [parentPhone, setParentPhone] = useState("");
+
+  // OTP states
   const [otpStudent, setOtpStudent] = useState(['','','','']);
   const [otpParent, setOtpParent] = useState(['','','','']);
-  const [timer,setTimer] = useState(2);
 
-  useEffect(()=>{
-    if(timer>0){
-      const interval = setInterval(()=>{
-        setTimer(t=>t-1)
-      },1000)
-      return ()=>clearInterval(interval)
+  const [timer,setTimer] = useState(20);
+
+  // Message states
+  const [infoMessage, setInfoMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("red");
+
+  // refs
+  const studentRefs = useRef([]);
+  const parentRefs = useRef([]);
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer(t => t - 1)
+      }, 1000)
+      return () => clearInterval(interval)
     }
-  },[timer])
+  }, [timer])
 
-  const updateOtp = (value,index,type)=>{
-    if(type==='student'){
-      let arr=[...otpStudent]
-      arr[index]=value
-      setOtpStudent(arr)
-    }else{
-      let arr=[...otpParent]
-      arr[index]=value
-      setOtpParent(arr)
+  const updateOtp = (value, index, type) => {
+
+    setInfoMessage("");
+
+    if (type === 'student') {
+
+      let arr = [...otpStudent];
+      arr[index] = value;
+      setOtpStudent(arr);
+
+      if (value && index < 3 && studentRefs.current[index + 1]) {
+        studentRefs.current[index + 1].focus();
+      }
+
+    } else {
+
+      let arr = [...otpParent];
+      arr[index] = value;
+      setOtpParent(arr);
+
+      if (value && index < 3 && parentRefs.current[index + 1]) {
+        parentRefs.current[index + 1].focus();
+      }
+
+    }
+  }
+
+  const handleRegistration = () => {
+
+    const sOtp = otpStudent.join("");
+    const pOtp = otpParent.join("");
+
+    const VALID_ID = "00000";
+    const TEST_STUDENT_PHONE = "9391215620";
+    const TEST_PARENT_PHONE = "9391215620";
+    const VALID_OTP = "1234";
+
+    if (studentId !== VALID_ID) {
+
+      setMessageColor("red");
+      setInfoMessage("Invalid Student ID (Try 00000)");
+
+    } else if (studentPhone !== TEST_STUDENT_PHONE) {
+
+      setMessageColor("red");
+      setInfoMessage("Student phone must be 9391215620");
+
+    } else if (parentPhone !== TEST_PARENT_PHONE) {
+
+      setMessageColor("red");
+      setInfoMessage("Parent phone must be 9391215620");
+
+    } else if (sOtp === VALID_OTP && pOtp === VALID_OTP) {
+
+      setMessageColor("green");
+      setInfoMessage("Registration Successful! Redirecting...");
+
+      setTimeout(() => {
+        router.push("/Document");
+      }, 800);
+
+    } else {
+
+      setMessageColor("red");
+      setInfoMessage("Invalid OTPs. Use 1234");
+
     }
   }
 
   const renderOtp = (type)=>{
+
     const data = type==='student'?otpStudent:otpParent
+    const refs = type === 'student' ? studentRefs : parentRefs;
 
     return(
+
       <View style={styles.otpContainer}>
+
         {data.map((item,index)=>(
+
           <TextInput
             key={index}
+            ref={(el) => (refs.current[index] = el)}
             style={styles.otpBox}
             keyboardType="numeric"
             maxLength={1}
             value={item}
-            onChangeText={(val)=>updateOtp(val,index,type)}
+            onChangeText={(val) => updateOtp(val, index, type)}
           />
+
         ))}
+
       </View>
     )
   }
 
   return (
+
     <ScrollView style={styles.container}>
 
       <View style={styles.header}>
 
         <Image
         source={require("../assets/images/Logo.png")}
-         style={styles.logo}
+        style={styles.logo}
         />
 
         <Text style={styles.classroom}>Classroom</Text>
@@ -80,40 +172,76 @@ export default function RegistrationScreen() {
         <Text style={styles.subtitle}>Secure your details</Text>
 
         <Text style={styles.label}>Student ID</Text>
-        <TextInput placeholder="Eg: R2012567" style={styles.input}/>
+
+        <TextInput
+          placeholder="Eg: R2012567"
+          style={styles.input}
+          value={studentId}
+          onChangeText={setStudentId}
+        />
 
         <Text style={styles.label}>Student Name</Text>
-        <TextInput placeholder="Cadabra" style={styles.input}/>
+
+        <TextInput
+          placeholder="Cadabra"
+          style={styles.input}
+          value={studentName}
+          onChangeText={setStudentName}
+        />
 
         <Text style={styles.label}>Email ID</Text>
-        <TextInput placeholder="youremail@gmail.com" style={styles.input}/>
+
+        <TextInput
+          placeholder="youremail@gmail.com"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+        />
 
         <Text style={styles.label}>Birthday Date</Text>
+
         <View style={styles.inputIcon}>
-          <TextInput placeholder="May 19, 1996" style={{flex:1}}/>
+
+          <TextInput
+            placeholder="May 19, 1996"
+            style={{flex:1}}
+            value={birthday}
+            onChangeText={setBirthday}
+          />
+
           <Icon name="calendar" size={20}/>
+
         </View>
 
         <Text style={styles.label}>Student Phone Number</Text>
 
         <View style={styles.phoneRow}>
+
           <TouchableOpacity style={styles.country}>
+
             <Text>+91</Text>
             <Icon name="chevron-down"/>
+
           </TouchableOpacity>
 
           <TextInput
-            placeholder="34556 72356"
+            placeholder="9391215620"
             style={styles.phoneInput}
             keyboardType="numeric"
+            value={studentPhone}
+            onChangeText={setStudentPhone}
           />
+
         </View>
 
         <View style={styles.otpHeader}>
+
           <Text style={styles.label}>Code from SMS</Text>
+
           <Text style={styles.resend}>
-            00:0{timer} Resend OTP
+            00:{timer < 10 ? `0${timer}` : timer} Resend OTP
           </Text>
+
         </View>
 
         {renderOtp('student')}
@@ -121,49 +249,82 @@ export default function RegistrationScreen() {
         <Text style={styles.sectionTitle}>Parent/Guardian Details</Text>
 
         <Text style={styles.label}>Parent Guardian Name</Text>
-        <TextInput placeholder="ABC" style={styles.input}/>
+
+        <TextInput
+          placeholder="ABC"
+          style={styles.input}
+          value={parentName}
+          onChangeText={setParentName}
+        />
 
         <Text style={styles.label}>Relationship</Text>
+
         <View style={styles.dropdown}>
-          <Picker>
+
+          <Picker
+            selectedValue={relationship}
+            onValueChange={(itemValue) => setRelationship(itemValue)}
+          >
+
             <Picker.Item label="Father" value="father"/>
             <Picker.Item label="Mother" value="mother"/>
             <Picker.Item label="Guardian" value="guardian"/>
+
           </Picker>
+
         </View>
 
         <Text style={styles.label}>Parent Phone Number</Text>
 
         <View style={styles.phoneRow}>
+
           <TouchableOpacity style={styles.country}>
+
             <Text>+91</Text>
             <Icon name="chevron-down"/>
+
           </TouchableOpacity>
 
           <TextInput
-            placeholder="34556 72356"
+            placeholder="9391215620"
             style={styles.phoneInput}
             keyboardType="numeric"
+            value={parentPhone}
+            onChangeText={setParentPhone}
           />
+
         </View>
 
         <View style={styles.otpHeader}>
+
           <Text style={styles.label}>Code from SMS</Text>
+
           <Text style={styles.resend}>
-            00:0{timer} Resend OTP
+            00:{timer < 10 ? `0${timer}` : timer} Resend OTP
           </Text>
+
         </View>
 
         {renderOtp('parent')}
 
-        <TouchableOpacity>
+        {infoMessage ? (
+          <Text style={[styles.infoText, { color: messageColor }]}>
+            {infoMessage}
+          </Text>
+        ) : null}
+
+        <TouchableOpacity onPress={handleRegistration}>
+
           <LinearGradient
             colors={['#4c63ff','#3a4bd8']}
             style={styles.button}
           >
+
             <Text style={styles.buttonText}>Sign In</Text>
             <Icon name="arrow-right" color="#fff" size={20}/>
+
           </LinearGradient>
+
         </TouchableOpacity>
 
       </View>
@@ -285,24 +446,12 @@ otpBox:{
   textAlign:'center',
   fontSize:18
 },
-logoContainer:{
-  flexDirection:"row",
-  alignItems:"center",
-  justifyContent:"center",
-  marginBottom:25
-},
 
 logo:{
   width:45,
   height:45,
   resizeMode:"contain",
   marginRight:10
-},
-
-logoText:{
-  fontSize:22,
-  color:"#4c63ff",
-  fontWeight:"600"
 },
 
 sectionTitle:{
@@ -332,6 +481,13 @@ buttonText:{
   fontSize:16,
   fontWeight:'600',
   marginRight:10
+},
+
+infoText:{
+  textAlign:'center',
+  marginTop:15,
+  fontWeight:'600'
 }
 
 })
+

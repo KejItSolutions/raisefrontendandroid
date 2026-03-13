@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router"; // ADDED: Import the router
-import { useState } from "react";
+import { useState,useRef } from "react";
 import {
   FlatList,
   Image,
@@ -13,6 +13,9 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import DrawerMenu from "./components/DrawerMenu";
+import { Animated } from "react-native";
+import Header from "./components/Header";
 
 // 1. DYNAMIC DATA STRUCTURE
 // You can easily replace this with data fetched from your backend
@@ -48,6 +51,27 @@ const initialData = [
 ];
 
 const Documents = () => {
+  
+  //DrawerMenu
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerAnim = useRef(new Animated.Value(-260)).current;
+
+  const openDrawer = () => {
+    setDrawerOpen(true);
+    Animated.timing(drawerAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const closeDrawer = () => {
+    Animated.timing(drawerAnim, {
+      toValue: -260,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => setDrawerOpen(false));
+  };
   // State to hold your dynamic data
   const [documents, setDocuments] = useState(initialData);
 
@@ -85,32 +109,15 @@ const Documents = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* TOP HEADER */}
-        <View style={styles.header}>
-          <Image
-            source={require("../assets/images/Logo.png")}
-            style={styles.headerLogo}
-            resizeMode="contain"
-          />
-          <View style={styles.headerRight}>
-            <Ionicons
-              name="notifications-outline"
-              size={24}
-              color="#333"
-              style={styles.headerIcon}
-            />
-            <Image
-              source={{ uri: "https://i.pravatar.cc/100" }} // Placeholder avatar
-              style={styles.avatar}
-            />
-            <Ionicons name="ellipsis-vertical" size={24} color="#333" />
-          </View>
-        </View>
+
+          {/* HEADER COMPONENT */}
+         <Header openDrawer={openDrawer} />
+
 
         {/* TITLE SECTION */}
         <View style={styles.titleSection}>
           <Text style={styles.pageTitle}>My Documents</Text>
-          <TouchableOpacity style={styles.backButton}>
+          <TouchableOpacity style={styles.backButton} onPress={()=>router.back()}>
             <Ionicons name="arrow-back" size={16} color="#5C6BC0" />
             <Text style={styles.backText}>Back to Dashboard</Text>
           </TouchableOpacity>
@@ -130,6 +137,11 @@ const Documents = () => {
           <Ionicons name="add" size={32} color="#FFF" />
         </TouchableOpacity>
       </View>
+      <DrawerMenu
+        drawerOpen={drawerOpen}
+        closeDrawer={closeDrawer}
+        drawerAnim={drawerAnim}
+      />
     </SafeAreaView>
   );
 };
@@ -138,39 +150,39 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#EEF2FF", // Light purple/blue background
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    
   },
   container: {
     flex: 1,
     paddingHorizontal: 20,
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#FFF",
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 30,
-    marginTop: Platform.OS === "android" ? 20 : 10,
-    marginBottom: 24,
-    elevation: 2, // Android shadow
-    shadowColor: "#000", // iOS shadow
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-  },
-  headerRight: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  headerIcon: {
-    marginRight: 15,
-  },
-  headerLogo: {
-    height: 50,
-    width: 50,
-  },
+  
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   backgroundColor: "#FFF",
+  //   paddingVertical: 8,
+  //   paddingHorizontal: 20,
+  //   borderRadius: 30,
+  //   marginTop: Platform.OS === "android" ? 20 : 10,
+  //   marginBottom: 24,
+  //   elevation: 2, // Android shadow
+  //   shadowColor: "#000", // iOS shadow
+  //   shadowOffset: { width: 0, height: 1 },
+  //   shadowOpacity: 0.1,
+  //   shadowRadius: 3,
+  // },
+  // headerRight: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  // },
+  // headerIcon: {
+  //   marginRight: 15,
+  // },
+  // headerLogo: {
+  //   height: 50,
+  //   width: 50,
+  // },
   avatar: {
     width: 30,
     height: 30,
