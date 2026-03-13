@@ -1,24 +1,24 @@
 import { useRouter } from 'expo-router';
 import {
-  ArrowLeft,
-  Bell,
-  CheckCircle2,
-  MoreVertical
+    ArrowLeft,
+    Bell,
+    CheckCircle2,
+    MoreVertical
 } from 'lucide-react-native';
 import { useRef, useState } from 'react';
 import {
-  Animated,
-  FlatList,
-  Image,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+    Animated,
+    FlatList,
+    Image,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp
+    heightPercentageToDP as hp,
+    widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
