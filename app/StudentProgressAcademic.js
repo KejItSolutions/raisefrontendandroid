@@ -13,7 +13,7 @@ import Svg, { Circle } from "react-native-svg";
 
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
-const CircularProgress = ({ percentage, label }) => {
+const CircularProgress = ({ percentage, label, value }) => {
   const radius = 70;
   const strokeWidth = 12;
   const circumference = 2 * Math.PI * radius;
@@ -47,7 +47,8 @@ const CircularProgress = ({ percentage, label }) => {
       </Svg>
 
       <View style={styles.circleText}>
-        <Text style={styles.percent}>{percentage}%</Text>
+        <Text style={styles.percent}>{value ? value : `${percentage}%`}</Text>
+
         <Text style={styles.circleLabel}>{label}</Text>
       </View>
     </View>
@@ -319,12 +320,52 @@ export default function StudentProgressAcademic() {
         {activeTab === "marks" && (
           <>
             <View style={styles.statsCard}>
-              <CircularProgress percentage={80} label="CGPA" />
+              <View style={styles.statsHeader}>
+                <View>
+                  <Text style={styles.statsLabel}>Statistics</Text>
+                  <Text style={styles.semesterTitle}>Semester 01</Text>
+                </View>
 
-              <Text style={styles.cgpaText}>C.G.P.A</Text>
-              <Text style={styles.creditText}>Credits Earned : 23 / 24</Text>
+                <View style={{ position: "relative" }}>
+                  <TouchableOpacity
+                    style={styles.semButton}
+                    onPress={() => setShowDropdown(!showDropdown)}
+                  >
+                    <Text style={styles.semButtonText}>{semester}</Text>
+
+                    <Feather
+                      name={showDropdown ? "chevron-up" : "chevron-down"}
+                      size={16}
+                      color="#4A63F3"
+                    />
+                  </TouchableOpacity>
+
+                  {showDropdown && (
+                    <View style={styles.dropdownBox}>
+                      {["Sem 01", "Sem 02", "Sem 03", "Sem 04"].map((item) => (
+                        <TouchableOpacity
+                          key={item}
+                          style={styles.dropdownItem}
+                          onPress={() => {
+                            setSemester(item);
+                            setShowDropdown(false);
+                          }}
+                        >
+                          <Text style={styles.dropdownText}>{item}</Text>
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              </View>
+              <View style={styles.divider} />
+              <View style={styles.circleContainer}>
+                <CircularProgress percentage={88} value="8.8" label="CGPA" />
+
+                <Text style={styles.cgpaText}>C.G.P.A</Text>
+                <Text style={styles.creditText}>Credits Earned : 23 / 24</Text>
+              </View>
             </View>
-
             <Text style={styles.section}>Subject Marks</Text>
 
             {subjects.map((item, index) => (
@@ -440,6 +481,7 @@ const styles = StyleSheet.create({
 
   divider: {
     height: 1,
+
     backgroundColor: "#E6E9F2",
     marginVertical: 15,
   },
