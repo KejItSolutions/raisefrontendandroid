@@ -1,19 +1,19 @@
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
+  Image,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Image
+  View
 } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from "expo-linear-gradient";
-import Icon from 'react-native-vector-icons/Feather';
 import { useRouter } from "expo-router";
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function RegistrationScreen() {
 
@@ -152,7 +152,6 @@ export default function RegistrationScreen() {
   }
 
   return (
-
     <ScrollView style={styles.container}>
 
       <View style={styles.header}>
