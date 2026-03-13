@@ -112,258 +112,304 @@ export default function AccountDetailsScreen() {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={{ flex: 1 }}>
+            <ScrollView style={styles.container}>
 
-            {/* NAVBAR */}
-            <View style={styles.headerCard}>
+                {/* NAVBAR */}
+                <View style={styles.headerCard}>
 
-                <TouchableOpacity onPress={openDrawer}>
-                    <Image
-                        source={require("../../assets/images/watermark.png")}
-                        style={{ width: 50, height: 50 }}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
-
-                <View style={styles.headerRight}>
-                    <Feather name="bell" size={24} color="#444" />
-
-                    <Image
-                        source={{ uri: student.avatar }}
-                        style={styles.headerAvatar}
-                    />
-
-                    <Feather name="more-vertical" size={26} color="#444" />
-                </View>
-
-            </View>
-
-            <Text style={styles.title}>Account Details</Text>
-
-            <Text style={styles.back}>← Back to Dashboard</Text>
-
-            <View style={styles.cardWrapper}>
-
-                {/* Blue shadow */}
-                <BlurView intensity={60} tint="light" style={styles.cardShadow} />
-                <LinearGradient
-                    colors={["#B9B7F3", "#9AA4F5", "#8FA7FF"]}
-                    start={{ x: 0.5, y: 0 }}
-                    end={{ x: 0.5, y: 1 }}
-                    style={styles.card}
-                >
-
-                    {/* Top Row */}
-                    <View style={styles.topRow}>
-                        <Text style={styles.student}>Student ID: R2012567</Text>
-
+                    <TouchableOpacity onPress={openDrawer}>
                         <Image
-                            source={require("../../assets/images/NFC_icon.png")}
-                            style={styles.nfc}
+                            source={require("../../assets/images/Logo.png")}
+                            style={{ width: 50, height: 50 }}
+                            resizeMode="contain"
                         />
-                    </View>
-
-                    {/* CHIP + EYE ROW */}
-                    <View style={styles.chipContainer}>
-
-                        {/* CHIP */}
-                        <Image
-                            source={require("../../assets/images/card_chip_icon.png")}
-                            style={styles.chip}
-                        />
-
-                        {/* EYE + MASK */}
-                        <View style={styles.eyeRow}>
-                            <Feather name="eye" size={16} color="#fff" />
-
-                            <Image
-                                source={require("../../assets/images/balance_on_card_hidden.png")}
-                                style={styles.maskImage}
-                            />
-                        </View>
-
-                    </View>
-
-                    {/* Visa */}
-                    <Image
-                        source={require("../../assets/images/Visa_logo.png")}
-                        style={styles.visa}
-                    />
-                    {/* NAME */}
-                    <Text style={styles.name}>Evan Yates</Text>
-
-                    {/* TOTAL */}
-                    <Text style={styles.total}>Total Due: ₹17,000</Text>
-
-                </LinearGradient>
-            </View>
-
-            <View style={styles.tabs}>
-
-                <TouchableOpacity
-                    style={[styles.tab, activeTab === "overall" && styles.activeTab]}
-                    onPress={() => setActiveTab("overall")}
-                >
-                    <Text style={activeTab === "overall" && styles.activeText}>
-                        Over All Fee
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={[styles.tab, activeTab === "history" && styles.activeTab]}
-                    onPress={() => setActiveTab("history")}
-                >
-                    <Text style={activeTab === "history" && styles.activeText}>
-                        History
-                    </Text>
-                </TouchableOpacity>
-
-            </View>
-            {/* 
-            <View style={{ flex: 1 }}>
-                <Text style={styles.feeTitle}>{item.title}</Text>
-                <Text style={styles.sub}>{item.sub}</Text>
-                <Text style={styles.sub}>Due Date</Text>
-            </View>
-
-            <View style={{ alignItems: "flex-end" }}>
-                <Text style={styles.amount}>{item.amount}</Text>
-
-                <Text
-                    style={[
-                        styles.status,
-                        { color: item.status === "Paid" ? "#22C55E" : "#EF4444" }
-                    ]}
-                >
-                    {item.status}
-                </Text>
-
-                <Text style={styles.sub}>{item.date}</Text>
-                <Text style={styles.sub}>{item.time}</Text>
-            </View> */}
-
-            {/* OVERALL LIST */}
-
-            {activeTab === "overall" &&
-                overallFees.map((item, index) => (
-                    <View key={index} style={styles.feeCard}>
-
-                        <View style={styles.iconBox}>
-                            <Image
-                                source={require("../../assets/images/transaction_types_icons.png")}
-                                style={{ width: 22, height: 40 }}
-                            />
-                        </View>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.feeTitle}>{item.title}</Text>
-                            <Text style={styles.sub}>{item.sub}</Text>
-                            <Text
-                                style={[
-                                    styles.sub,
-                                    item.status === "Due" && styles.dueDate
-                                ]}
-                            >
-                                Due Date
-                            </Text>
-                            <Text style={styles.sub}>Time</Text>
-
-                        </View>
-
-                        <View style={{ alignItems: "flex-end" }}>
-                            <Text style={styles.amount}>{item.amount}</Text>
-
-                            <View
-                                style={[
-                                    styles.statusBadge,
-                                    item.status === "Paid" ? styles.paidBadge : styles.dueBadge
-                                ]}
-                            >
-                                <Text
-                                    style={[
-                                        styles.statusText,
-                                        item.status === "Paid" ? styles.paidText : styles.dueText
-                                    ]}
-                                >
-                                    {item.status}
-                                </Text>
-                            </View>
-
-                            {/* DATE */}
-                            <Text
-                                style={[
-                                    styles.sub,
-                                    item.status === "Due" && styles.dueDate
-                                ]}
-                            >
-                                {item.date}
-                            </Text>
-                            <Text style={styles.sub}>10:34 AM</Text>
-                        </View>
-
-                    </View>
-                ))
-            }
-
-            {/* HISTORY LIST */}
-
-            {activeTab === "history" &&
-                historyFees.map((item, index) => (
-                    <TouchableOpacity
-                        key={index}
-                        style={styles.feeCard}
-                        onPress={() => router.push("/AccountDetails/AccountdetailsExam")}
-                    >
-
-                        <View style={styles.iconBox}>
-                            <Image
-                                source={require("../../assets/images/transaction_types_icons.png")}
-                                style={{ width: 22, height: 40 }}
-                            />
-                        </View>
-
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.feeTitle}>{item.title}</Text>
-                            <Text style={styles.sub}>{item.sub}</Text>
-                            <Text
-                                style={[
-                                    styles.sub,
-                                    item.status === "Due" && styles.dueDate
-                                ]}
-                            >
-                                Due Date
-                            </Text>
-
-                            <Text style={styles.sub}>ID:23453453322</Text>
-                        </View>
-
-                        <View style={{ alignItems: "flex-end" }}>
-                            <Text style={styles.amount}>{item.amount}</Text>
-
-                            <View style={styles.paidBadge}>
-                                <Text style={styles.paidText}>Paid</Text>
-                            </View>
-
-                            <Text style={styles.sub}>{item.date}</Text>
-
-                            <Text style={styles.transaction}>View Transaction</Text>
-                        </View>
-
                     </TouchableOpacity>
 
+                    <View style={styles.headerRight}>
+                        <Feather name="bell" size={24} color="#444" />
 
-                ))
-            }
+                        <Image
+                            source={{ uri: student.avatar }}
+                            style={styles.headerAvatar}
+                        />
+
+                        <Feather name="more-vertical" size={26} color="#444" />
+                    </View>
+
+                </View>
+
+                <Text style={styles.title}>Account Details</Text>
+
+                <Text style={styles.back}>← Back to Dashboard</Text>
+
+                <View style={styles.cardWrapper}>
+
+                    {/* Blue shadow */}
+                    <BlurView intensity={60} tint="light" style={styles.cardShadow} />
+                    <LinearGradient
+                        colors={["#B9B7F3", "#9AA4F5", "#8FA7FF"]}
+                        start={{ x: 0.5, y: 0 }}
+                        end={{ x: 0.5, y: 1 }}
+                        style={styles.card}
+                    >
+
+                        {/* Top Row */}
+                        <View style={styles.topRow}>
+                            <Text style={styles.student}>Student ID: R2012567</Text>
+
+                            <Image
+                                source={require("../../assets/images/NFC_icon.png")}
+                                style={styles.nfc}
+                            />
+                        </View>
+
+                        {/* CHIP + EYE ROW */}
+                        <View style={styles.chipContainer}>
+
+                            {/* CHIP */}
+                            <Image
+                                source={require("../../assets/images/card_chip_icon.png")}
+                                style={styles.chip}
+                            />
+
+                            {/* EYE + MASK */}
+                            <View style={styles.eyeRow}>
+                                <Feather name="eye" size={16} color="#fff" />
+
+                                <Image
+                                    source={require("../../assets/images/balance_on_card_hidden.png")}
+                                    style={styles.maskImage}
+                                />
+                            </View>
+
+                        </View>
+
+                        {/* Visa */}
+                        <Image
+                            source={require("../../assets/images/Visa_logo.png")}
+                            style={styles.visa}
+                        />
+                        {/* NAME */}
+                        <Text style={styles.name}>Evan Yates</Text>
+
+                        {/* TOTAL */}
+                        <Text style={styles.total}>Total Due: ₹17,000</Text>
+
+                    </LinearGradient>
+                </View>
+
+                <View style={styles.tabs}>
+
+                    <TouchableOpacity
+                        style={[styles.tab, activeTab === "overall" && styles.activeTab]}
+                        onPress={() => setActiveTab("overall")}
+                    >
+                        <Text style={activeTab === "overall" && styles.activeText}>
+                            Over All Fee
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[styles.tab, activeTab === "history" && styles.activeTab]}
+                        onPress={() => setActiveTab("history")}
+                    >
+                        <Text style={activeTab === "history" && styles.activeText}>
+                            History
+                        </Text>
+                    </TouchableOpacity>
+
+                </View>
+
+
+                {/* OVERALL LIST */}
+
+                {activeTab === "overall" &&
+                    overallFees.map((item, index) => (
+                        <View key={index} style={styles.feeCard}>
+
+                            <View style={styles.iconBox}>
+                                <Image
+                                    source={require("../../assets/images/transaction_types_icons.png")}
+                                    style={{ width: 22, height: 40 }}
+                                />
+                            </View>
+
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.feeTitle}>{item.title}</Text>
+                                <Text style={styles.sub}>{item.sub}</Text>
+                                <Text
+                                    style={[
+                                        styles.sub,
+                                        item.status === "Due" && styles.dueDate
+                                    ]}
+                                >
+                                    Due Date
+                                </Text>
+                                <Text style={styles.sub}>Time</Text>
+
+                            </View>
+
+                            <View style={{ alignItems: "flex-end" }}>
+                                <Text style={styles.amount}>{item.amount}</Text>
+
+                                <View
+                                    style={[
+                                        styles.statusBadge,
+                                        item.status === "Paid" ? styles.paidBadge : styles.dueBadge
+                                    ]}
+                                >
+                                    <Text
+                                        style={[
+                                            styles.statusText,
+                                            item.status === "Paid" ? styles.paidText : styles.dueText
+                                        ]}
+                                    >
+                                        {item.status}
+                                    </Text>
+                                </View>
+
+                                {/* DATE */}
+                                <Text
+                                    style={[
+                                        styles.sub,
+                                        item.status === "Due" && styles.dueDate
+                                    ]}
+                                >
+                                    {item.date}
+                                </Text>
+                                <Text style={styles.sub}>10:34 AM</Text>
+                            </View>
+
+                        </View>
+                    ))
+                }
+
+                {/* HISTORY LIST */}
+
+                {activeTab === "history" &&
+                    historyFees.map((item, index) => (
+                        <TouchableOpacity
+                            key={index}
+                            style={styles.feeCard}
+                            onPress={() => router.push("/AccountDetails/AccountdetailsExam")}
+                        >
+
+                            <View style={styles.iconBox}>
+                                <Image
+                                    source={require("../../assets/images/transaction_types_icons.png")}
+                                    style={{ width: 22, height: 40 }}
+                                />
+                            </View>
+
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.feeTitle}>{item.title}</Text>
+                                <Text style={styles.sub}>{item.sub}</Text>
+                                <Text
+                                    style={[
+                                        styles.sub,
+                                        item.status === "Due" && styles.dueDate
+                                    ]}
+                                >
+                                    Due Date
+                                </Text>
+
+                                <Text style={styles.sub}>ID:23453453322</Text>
+                            </View>
+
+                            <View style={{ alignItems: "flex-end" }}>
+                                <Text style={styles.amount}>{item.amount}</Text>
+
+                                <View style={styles.paidBadge}>
+                                    <Text style={styles.paidText}>Paid</Text>
+                                </View>
+
+                                <Text style={styles.sub}>{item.date}</Text>
+
+                                <Text style={styles.transaction}>View Transaction</Text>
+                            </View>
+
+                        </TouchableOpacity>
+
+
+                    ))
+                }
+                {/* Drawer */}
+                {drawerOpen && (
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={styles.overlay}
+                        onPress={closeDrawer}
+                    >
+                        <Animated.View
+                            style={[styles.drawer, { transform: [{ translateX: drawerAnim }] }]}
+                        >
+                            {/* Header */}
+                            <View style={styles.drawerHeader}>
+                                <Image
+                                    source={require("../../assets/images/watermark.png")}
+                                    style={styles.drawerLogo}
+                                />
+                                <Text style={styles.drawerTitle}>Classroom</Text>
+                            </View>
+
+                            {/* Menu */}
+                            {menuItems.map((item, index) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    style={[styles.menuItem, index === 0 && styles.activeMenu]}
+                                    onPress={() => {
+                                        if (item.name === "Dashboard") {
+                                            router.push("/Dashboard");
+                                        }
+                                        closeDrawer();
+                                    }}
+                                >
+                                    <Feather
+                                        name={item.icon}
+                                        size={20}
+                                        color={index === 0 ? "#4A63F3" : "#7B8190"}
+                                    />
+
+                                    <Text
+                                        style={[styles.menuText, index === 0 && { color: "#4A63F3" }]}
+                                    >
+                                        {item.name}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+
+                            {/* Logout */}
+                            <TouchableOpacity style={styles.logoutBtn}>
+                                <Feather name="log-out" size={18} color="#fff" />
+                                <Text style={styles.logoutText}>Logout</Text>
+                            </TouchableOpacity>
+                        </Animated.View>
+                    </TouchableOpacity>
+                )}
+
+            </ScrollView>
+
+            {/* sidebar */}
             {/* Drawer */}
             {drawerOpen && (
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={styles.overlay}
-                    onPress={closeDrawer}
-                >
+                <View style={StyleSheet.absoluteFill}>
+
+                    {/* Overlay */}
+                    <TouchableOpacity
+                        style={styles.overlay}
+                        activeOpacity={1}
+                        onPress={closeDrawer}
+                    />
+
+                    {/* Drawer Panel */}
                     <Animated.View
-                        style={[styles.drawer, { transform: [{ translateX: drawerAnim }] }]}
+                        style={[
+                            styles.drawer,
+                            { transform: [{ translateX: drawerAnim }] }
+                        ]}
                     >
+
                         {/* Header */}
                         <View style={styles.drawerHeader}>
                             <Image
@@ -377,11 +423,11 @@ export default function AccountDetailsScreen() {
                         {menuItems.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
-                                style={[styles.menuItem, index === 0 && styles.activeMenu]}
+                                style={[
+                                    styles.menuItem,
+                                    index === 0 && styles.activeMenu
+                                ]}
                                 onPress={() => {
-                                    if (item.name === "Dashboard") {
-                                        router.push("/Dashboard");
-                                    }
                                     closeDrawer();
                                 }}
                             >
@@ -392,7 +438,10 @@ export default function AccountDetailsScreen() {
                                 />
 
                                 <Text
-                                    style={[styles.menuText, index === 0 && { color: "#4A63F3" }]}
+                                    style={[
+                                        styles.menuText,
+                                        index === 0 && { color: "#4A63F3" }
+                                    ]}
                                 >
                                     {item.name}
                                 </Text>
@@ -404,11 +453,12 @@ export default function AccountDetailsScreen() {
                             <Feather name="log-out" size={18} color="#fff" />
                             <Text style={styles.logoutText}>Logout</Text>
                         </TouchableOpacity>
-                    </Animated.View>
-                </TouchableOpacity>
-            )}
 
-        </ScrollView>
+                    </Animated.View>
+
+                </View>
+            )}
+        </View>
 
     )
 
