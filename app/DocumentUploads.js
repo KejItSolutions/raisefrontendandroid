@@ -71,7 +71,7 @@ export default function DocumentUploads() {
       {/* TOP HEADER */}
       <View style={styles.header}>
         <Image
-          source={require("../assets/images/logo.png")}
+          source={require("../assets/images/Logo.png")}
           style={styles.headerLogo}
           resizeMode="contain"
         />
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   scrollContent: {
-    paddingBottom: 100, 
+    paddingBottom: 100,
   },
   titleSection: {
     marginBottom: 20,
