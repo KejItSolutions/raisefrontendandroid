@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import DrawerMenu from "./components/DrawerMenu";
 import Header from "./components/Header";
-
 // 1. DYNAMIC DATA STRUCTURE
 // You can easily replace this with data fetched from your backend
 const initialData = [
@@ -48,7 +48,7 @@ const initialData = [
 ];
 
 const Documents = () => {
-  
+
   //DrawerMenu
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerAnim = useRef(new Animated.Value(-260)).current;
@@ -106,15 +106,32 @@ const Documents = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-
-          {/* HEADER COMPONENT */}
-         <Header openDrawer={openDrawer} />
-
+        {/* TOP HEADER */}
+        <View style={styles.header}>
+          <Image
+            source={require("../assets/images/logo.png")}
+            style={styles.headerLogo}
+            resizeMode="contain"
+          />
+          <View style={styles.headerRight}>
+            <Ionicons
+              name="notifications-outline"
+              size={24}
+              color="#333"
+              style={styles.headerIcon}
+            />
+            <Image
+              source={{ uri: "https://i.pravatar.cc/100" }} // Placeholder avatar
+              style={styles.avatar}
+            />
+            <Ionicons name="ellipsis-vertical" size={24} color="#333" />
+          </View>
+        </View>
 
         {/* TITLE SECTION */}
         <View style={styles.titleSection}>
           <Text style={styles.pageTitle}>My Documents</Text>
-          <TouchableOpacity style={styles.backButton} onPress={()=>router.back()}>
+          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
             <Ionicons name="arrow-back" size={16} color="#5C6BC0" />
             <Text style={styles.backText}>Back to Dashboard</Text>
           </TouchableOpacity>
@@ -147,13 +164,13 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#EEF2FF", // Light purple/blue background
-    
+
   },
   container: {
     flex: 1,
     paddingHorizontal: 20,
   },
-  
+
   //   flexDirection: "row",
   //   justifyContent: "space-between",
   //   alignItems: "center",
