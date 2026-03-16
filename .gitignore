@@ -2,7 +2,9 @@
 
 # dependencies
 node_modules/
-
+app/index.js
+package-lock.json
+package.json
 # Expo
 .expo/
 dist/
