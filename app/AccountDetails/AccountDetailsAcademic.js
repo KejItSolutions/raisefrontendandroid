@@ -100,15 +100,15 @@ export default function AccountDetailsScreen() {
         { title: "Tuition fee", sub: "Semester 01", amount: "₹80,000", date: "17 Sep 2023" },
     ];
 
-    const menuItems = [
-        { name: "Dashboard", icon: "grid" },
-        { name: "Academics", icon: "book-open" },
-        { name: "Maps", icon: "map-pin" },
-        { name: "Careers", icon: "target" },
-        { name: "Events", icon: "award" },
-        { name: "Sports & Athletics", icon: "activity" },
-        { name: "Feedback", icon: "message-square" },
-    ];
+    // const menuItems = [
+    //     { name: "Dashboard", icon: "grid" },
+    //     { name: "Academics", icon: "book-open" },
+    //     { name: "Maps", icon: "map-pin" },
+    //     { name: "Careers", icon: "target" },
+    //     { name: "Events", icon: "award" },
+    //     { name: "Sports & Athletics", icon: "activity" },
+    //     { name: "Feedback", icon: "message-square" },
+    // ];
 
     return (
 
@@ -334,131 +334,15 @@ export default function AccountDetailsScreen() {
 
                     ))
                 }
-                {/* Drawer */}
-                {drawerOpen && (
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={styles.overlay}
-                        onPress={closeDrawer}
-                    >
-                        <Animated.View
-                            style={[styles.drawer, { transform: [{ translateX: drawerAnim }] }]}
-                        >
-                            {/* Header */}
-                            <View style={styles.drawerHeader}>
-                                <Image
-                                    source={require("../../assets/images/watermark.png")}
-                                    style={styles.drawerLogo}
-                                />
-                                <Text style={styles.drawerTitle}>Classroom</Text>
-                            </View>
 
-                            {/* Menu */}
-                            {menuItems.map((item, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    style={[styles.menuItem, index === 0 && styles.activeMenu]}
-                                    onPress={() => {
-                                        if (item.name === "Dashboard") {
-                                            router.push("/Dashboard");
-                                        }
-                                        closeDrawer();
-                                    }}
-                                >
-                                    <Feather
-                                        name={item.icon}
-                                        size={20}
-                                        color={index === 0 ? "#4A63F3" : "#7B8190"}
-                                    />
 
-                                    <Text
-                                        style={[styles.menuText, index === 0 && { color: "#4A63F3" }]}
-                                    >
-                                        {item.name}
-                                    </Text>
-                                </TouchableOpacity>
-                            ))}
-
-                            {/* Logout */}
-                            <TouchableOpacity style={styles.logoutBtn}>
-                                <Feather name="log-out" size={18} color="#fff" />
-                                <Text style={styles.logoutText}>Logout</Text>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    </TouchableOpacity>
-                )}
 
             </ScrollView>
 
-            {/* sidebar */}
+            {/* sidebar
             {/* Drawer */}
-            {drawerOpen && (
-                <View style={StyleSheet.absoluteFill}>
 
-                    {/* Overlay */}
-                    <TouchableOpacity
-                        style={styles.overlay}
-                        activeOpacity={1}
-                        onPress={closeDrawer}
-                    />
-
-                    {/* Drawer Panel */}
-                    <Animated.View
-                        style={[
-                            styles.drawer,
-                            { transform: [{ translateX: drawerAnim }] }
-                        ]}
-                    >
-
-                        {/* Header */}
-                        <View style={styles.drawerHeader}>
-                            <Image
-                                source={require("../../assets/images/watermark.png")}
-                                style={styles.drawerLogo}
-                            />
-                            <Text style={styles.drawerTitle}>Classroom</Text>
-                        </View>
-
-                        {/* Menu */}
-                        {menuItems.map((item, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                style={[
-                                    styles.menuItem,
-                                    index === 0 && styles.activeMenu
-                                ]}
-                                onPress={() => {
-                                    closeDrawer();
-                                }}
-                            >
-                                <Feather
-                                    name={item.icon}
-                                    size={20}
-                                    color={index === 0 ? "#4A63F3" : "#7B8190"}
-                                />
-
-                                <Text
-                                    style={[
-                                        styles.menuText,
-                                        index === 0 && { color: "#4A63F3" }
-                                    ]}
-                                >
-                                    {item.name}
-                                </Text>
-                            </TouchableOpacity>
-                        ))}
-
-                        {/* Logout */}
-                        <TouchableOpacity style={styles.logoutBtn}>
-                            <Feather name="log-out" size={18} color="#fff" />
-                            <Text style={styles.logoutText}>Logout</Text>
-                        </TouchableOpacity>
-
-                    </Animated.View>
-
-                </View>
-            )}
-        </View>
+        </View >
 
     )
 
@@ -703,4 +587,79 @@ const styles = StyleSheet.create({
         tintColor: "#fff"
     },
 
+    // sidebar styles
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: "rgba(0,0,0,0.45)"
+    },
+
+    drawer: {
+        position: "absolute",
+        left: 10,
+        top: 10,
+        bottom: 40,
+        width: 230,
+        height: 700,
+        backgroundColor: "#fff",
+        borderRadius: 30,
+        paddingTop: 25,
+        paddingHorizontal: 20,
+        // elevation: 20
+    },
+
+    drawerHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 30
+    },
+
+    drawerLogo: {
+        width: 35,
+        height: 35,
+        marginRight: 10,
+        resizeMode: "contain"
+    },
+
+    drawerTitle: {
+        fontSize: 18,
+        fontWeight: "600",
+        color: "#4A63F5"
+    },
+
+    menuItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: 14,
+        paddingHorizontal: 12,
+        borderRadius: 12,
+        marginBottom: 8
+    },
+
+    menuText: {
+        fontSize: 15,
+        marginLeft: 14,
+        color: "#7B8190",
+        fontWeight: "500"
+    },
+
+    activeMenu: {
+        backgroundColor: "#EEF1FF"
+    },
+
+    logoutBtn: {
+        backgroundColor: "#4A63F5",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 14,
+        borderRadius: 14,
+        marginBottom: 20
+    },
+
+    logoutText: {
+        color: "#fff",
+        marginLeft: 8,
+        fontWeight: "600",
+        fontSize: 14
+    }
 });

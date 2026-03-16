@@ -109,7 +109,7 @@ const Documents = () => {
         {/* TOP HEADER */}
         <View style={styles.header}>
           <Image
-            source={require("../assets/images/logo.png")}
+            source={require("../assets/images/Logo.png")}
             style={styles.headerLogo}
             resizeMode="contain"
           />
