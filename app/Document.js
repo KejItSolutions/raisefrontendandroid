@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router"; // ADDED: Import the router
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
+  Animated,
   FlatList,
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -12,6 +12,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import DrawerMenu from "./components/DrawerMenu";
+import Header from "./components/Header";
 // 1. DYNAMIC DATA STRUCTURE
 // You can easily replace this with data fetched from your backend
 const initialData = [

@@ -2,14 +2,13 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router"; // ADDED: Import the router
 import { useState } from "react";
 import {
-  Image,
   Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 // --- DYNAMIC DATA STRUCTURES ---
 // You can easily replace these with data from Fetch or Axios calls
