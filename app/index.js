@@ -12,6 +12,7 @@ export default function Index() {
 
 import { View } from "react-native";
 import LoginScreen from "./LoginScreen";
+
 export default function Index() {
   return (
 
