@@ -1,20 +1,17 @@
 import { useRouter } from "expo-router"; // ADDED: Import the router
-import { useState,useRef } from "react";
+import { useRef, useState } from "react";
 import {
+  Animated,
   FlatList,
-  Image,
-  Platform,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import DrawerMenu from "./components/DrawerMenu";
-import { Animated } from "react-native";
 import Header from "./components/Header";
 
 // 1. DYNAMIC DATA STRUCTURE
