@@ -1,7 +1,7 @@
-import { Animated, Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { Animated, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 export default function DrawerMenu({ drawerOpen, closeDrawer, drawerAnim }) {
 
@@ -52,9 +52,9 @@ export default function DrawerMenu({ drawerOpen, closeDrawer, drawerAnim }) {
           </TouchableOpacity>
         ))}
 
-        <TouchableOpacity style={styles.logoutBtn} onPress={()=>router.push("/LoginScreen")}>
-           <Feather name="log-out" size={18} color="#fff" />
-            <Text style={styles.logoutText} >Logout</Text>
+        <TouchableOpacity style={styles.logoutBtn} onPress={() => router.push("/LoginScreen")}>
+          <Feather name="log-out" size={18} color="#fff" />
+          <Text style={styles.logoutText} >Logout</Text>
         </TouchableOpacity>
 
       </Animated.View>
@@ -86,34 +86,34 @@ const styles = StyleSheet.create({
     elevation:1000
   },
 
-  drawerHeader:{
-    flexDirection:"row",
-    alignItems:"center",
-    marginBottom:30
+  drawerHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 30
   },
 
-  logo:{
-    height: hp('6%') ,
+  logo: {
+    height: hp('6%'),
     width: wp('10%'),
-    marginRight:10
+    marginRight: 10
   },
 
-  title:{
-    fontSize:18,
-    fontWeight:"700",
-    color:"#5266d6"
+  title: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#5266d6"
   },
 
-  menuItem:{
-    flexDirection:"row",
-    alignItems:"center",
-    paddingVertical:12
+  menuItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12
   },
 
-  menuText:{
-    marginLeft:15,
-    fontSize:15,
-    color:"#6F7685"
+  menuText: {
+    marginLeft: 15,
+    fontSize: 15,
+    color: "#6F7685"
   },
   logoutBtn: {
     marginTop: 30,
