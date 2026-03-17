@@ -1,8 +1,7 @@
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router"; // ADDED: Import the router
-import { useState } from "react";
+import { useState,useRef } from "react";
 import {
-  Image,
   Platform,
   ScrollView,
   StatusBar,
@@ -10,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Animated,
 } from "react-native";
 import DrawerMenu from "./components/DrawerMenu";
 import Header from "./components/Header";
@@ -32,7 +32,7 @@ const initialCertifications = [
 
 export default function DocumentUploads() {
 
-    //DrawerMenu
+  //DrawerMenu
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerAnim = useRef(new Animated.Value(-260)).current;
 
@@ -161,6 +161,41 @@ const styles = StyleSheet.create({
     backgroundColor: "#EEF2FF",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 5,
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#FFF",
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    marginHorizontal: 20,
+    marginTop: Platform.OS === "android" ? 20 : 10,
+    marginBottom: 24,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+  },
+  headerLogo: {
+    height: 50,
+    width: 50,
+
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerIcon: {
+    marginRight: 15,
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 15,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
@@ -220,7 +255,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     elevation: 4,
-    shadowColor: "#448AFF",
+    shadowColor: '#448AFF',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -229,6 +264,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "600",
     fontSize: 14,
+
   },
   sectionHeading: {
     fontSize: 16,

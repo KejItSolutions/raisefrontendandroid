@@ -1,5 +1,3 @@
-import { Picker } from "@react-native-picker/picker";
-import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Image,
@@ -9,7 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
+import { useRouter } from "expo-router";
+import { Picker } from "@react-native-picker/picker";
 export default function LoginScreen() {
   const router = useRouter();
 
@@ -275,3 +274,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+

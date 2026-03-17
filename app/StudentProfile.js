@@ -14,8 +14,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 import DrawerMenu from "./components/DrawerMenu";
 import Header  from "./components/Header";
+
 const { width } = Dimensions.get("window");
 
 export default function StudentProfile() {
@@ -42,9 +44,15 @@ export default function StudentProfile() {
       useNativeDriver: true,
     }).start(() => setDrawerOpen(false));
   };
-
- 
-
+  const menuItems = [
+    { name: "Dashboard", icon: "grid" },
+    { name: "Academics", icon: "book-open" },
+    { name: "Maps", icon: "map-pin" },
+    { name: "Careers", icon: "target" },
+    { name: "Events", icon: "award" },
+    { name: "Sports & Athletics", icon: "activity" },
+    { name: "Feedback", icon: "message-square" },
+  ];
   const [student] = useState({
     name: "Evan Yates",
     email: "evanyates@gmail.com",
@@ -61,8 +69,27 @@ export default function StudentProfile() {
     <SafeAreaView style={{ flex: 1 }}>
       <LinearGradient colors={["#EEF1F7", "#DCE1F1"]} style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
+
           {/* Header */}
-          <Header openDrawer={openDrawer}/>
+          <View style={styles.headerCard}>
+            <TouchableOpacity onPress={openDrawer}>
+              <Image
+                source={require("../assets/images/watermark.png")}
+                style={{ width: 50, height: 50 }}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+
+            <View style={styles.headerRight}>
+              <Feather name="bell" size={28} color="#444" />
+              <Image
+                source={{ uri: student.avatar }}
+                style={styles.headerAvatar}
+              />
+              <Feather name="more-vertical" size={28} color="#444" />
+            </View>
+          </View>
+
           <Text style={styles.welcome}>Welcome back, {student.name}!</Text>
           <Text style={styles.title}>Student profile</Text>
 
@@ -72,8 +99,10 @@ export default function StudentProfile() {
               source={require("../assets/images/watermark.png")}
               style={styles.watermark}
             />
+
             <View style={styles.profileTop}>
               <Image source={{ uri: student.avatar }} style={styles.avatar} />
+
               <View style={{ flex: 1 }}>
                 <Text style={styles.name}>{student.name}</Text>
                 <Text style={styles.email}>{student.email}</Text>
@@ -145,7 +174,12 @@ export default function StudentProfile() {
                 source={require("../assets/images/watermark.png")}
                 style={styles.digitalWatermark}
               />
-              <Image source={{ uri: student.avatar }} style={styles.digitalAvatar} />
+
+              <Image
+                source={{ uri: student.avatar }}
+                style={styles.digitalAvatar}
+              />
+
               <Text style={styles.digitalName}>{student.name}</Text>
               <Text style={styles.digitalCourse}>{student.stream}</Text>
               <Text style={styles.digitalReg}>{student.registerNo}</Text>
@@ -165,7 +199,6 @@ export default function StudentProfile() {
         drawerOpen={drawerOpen}
         closeDrawer={closeDrawer}
         drawerAnim={drawerAnim}
-        
         router={router}
       />
     </SafeAreaView>
@@ -173,32 +206,295 @@ export default function StudentProfile() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: width * 0.05 },
-  
-  welcome: { marginTop: 20, fontSize: width * 0.039, color: "#7A7F9A", paddingLeft: 13 },
-  title: { fontSize: width * 0.09, fontWeight: "700", marginTop: 5, color: "#0B132A", paddingLeft: 13 },
-  card: { backgroundColor: "#fff", borderRadius: 20, padding: 20, marginTop: 20, elevation: 5 },
-  card1: { backgroundColor: "#fff", borderRadius: 20, padding: 20, marginTop: 25, elevation: 5 },
-  profileTop: { flexDirection: "row", alignItems: "center" },
-  avatar: { width: width * 0.12, height: width * 0.14, borderRadius: 30, marginRight: 10 },
-  name: { fontSize: width * 0.04, fontWeight: "700", paddingLeft: 3, marginTop: 18 },
-  email: { fontSize: width * 0.032, color: "#8A8FA3", paddingBottom: 7, paddingLeft: 3 },
-  divider: { height: 1, backgroundColor: "#ECEEF6", marginVertical: 15 },
-  row: { flexDirection: "row", justifyContent: "space-between", marginBottom: 20, marginTop: 10 },
-  label: { fontSize: width * 0.04, color: "#9AA0B4" },
-  value: { fontSize: width * 0.04, fontWeight: "600", marginTop: 2 },
-  button: { borderRadius: 12, paddingVertical: 14, flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 10 },
-  buttonText: { color: "#fff", fontWeight: "600", marginLeft: 6, fontSize: width * 0.035 },
-  watermark: { position: "absolute", alignSelf: "center", top: 81, width: width * 0.6, height: width * 0.35, opacity: 0.15 },
-  modalOverlay: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "rgba(0,0,0,0.15)" },
-  digitalCard: { width: width * 0.85, backgroundColor: "#fff", borderRadius: 25, overflow: "hidden", elevation: 15 },
-  digitalTop: { backgroundColor: "#E9EBF7", width: "100%", alignItems: "center", padding: 10, borderRadius: 10, paddingVertical: 25, position: "relative" },
-  digitalWatermark: { position: "absolute", marginTop: 40, width: width * 0.58, height: width * 0.35, opacity: 0.15, top: 40 },
-  digitalAvatar: { width: 70, height: 70, borderRadius: 40, borderWidth: 3, borderColor: "#4A63F3" },
-  digitalName: { marginTop: 10, fontSize: 18, fontWeight: "700" },
-  digitalCourse: { fontSize: 14, color: "#666" },
-  digitalReg: { fontSize: 14, color: "#777" },
-  validText: { marginTop: 20, textAlign: "center", color: "#555" },
-  barcodeBox: { marginTop: 15, marginBottom: 25, alignSelf: "center", backgroundColor: "#D9DCF5", borderRadius: 8, padding: 8 },
-  barcode: { width: 180, height: 35, backgroundColor: "#4259FA" },
+  container: {
+    flex: 1,
+    paddingHorizontal: width * 0.05,
+  },
+
+  headerCard: {
+    marginTop: 65,
+    backgroundColor: "#fff",
+    borderRadius: 18,
+    padding: 12,
+    paddingLeft: 23,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 15,
+  },
+
+  headerAvatar: {
+    width: 32,
+    height: 32,
+    borderRadius: 20,
+  },
+
+  welcome: {
+    marginTop: 20,
+    fontSize: width * 0.039,
+    color: "#7A7F9A",
+    paddingLeft: 13,
+  },
+
+  title: {
+    fontSize: width * 0.09,
+    fontWeight: "700",
+    marginTop: 5,
+    color: "#0B132A",
+    paddingLeft: 13,
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 20,
+    marginTop: 20,
+    elevation: 5,
+  },
+
+  card1: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 20,
+    marginTop: 25,
+    elevation: 5,
+  },
+
+  profileTop: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  avatar: {
+    width: width * 0.12,
+    height: width * 0.14,
+    borderRadius: 30,
+    marginRight: 10,
+  },
+
+  name: {
+    fontSize: width * 0.04,
+    fontWeight: "700",
+    paddingLeft: 3,
+    marginTop: 18,
+  },
+
+  email: {
+    fontSize: width * 0.032,
+    color: "#8A8FA3",
+    paddingBottom: 7,
+    paddingLeft: 3,
+  },
+
+  divider: {
+    height: 1,
+    backgroundColor: "#ECEEF6",
+    marginVertical: 15,
+  },
+
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    marginTop: 10,
+  },
+
+  label: {
+    fontSize: width * 0.04,
+    color: "#9AA0B4",
+  },
+
+  value: {
+    fontSize: width * 0.04,
+    fontWeight: "600",
+    marginTop: 2,
+  },
+
+  button: {
+    borderRadius: 12,
+    paddingVertical: 14,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontWeight: "600",
+    marginLeft: 6,
+    fontSize: width * 0.035,
+  },
+
+  watermark: {
+    position: "absolute",
+    alignSelf: "center",
+    top: 81,
+    width: width * 0.6,
+    height: width * 0.35,
+    opacity: 0.15,
+  },
+
+  modalOverlay: {
+    flex: 1,
+
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.15)",
+  },
+
+  digitalCard: {
+    width: width * 0.85,
+    backgroundColor: "#fff",
+    borderRadius: 25,
+
+    overflow: "hidden",
+    elevation: 15,
+  },
+
+  digitalTop: {
+    backgroundColor: "#E9EBF7",
+    width: "100%",
+    alignItems: "center",
+    padding: 10,
+
+    borderRadius: 10,
+    paddingVertical: 25,
+    position: "relative",
+  },
+
+  digitalWatermark: {
+    position: "absolute",
+    marginTop: 40,
+    width: width * 0.58,
+    height: width * 0.35,
+    opacity: 0.15,
+    top: 40,
+  },
+
+  digitalAvatar: {
+    width: 70,
+    height: 70,
+    borderRadius: 40,
+    borderWidth: 3,
+    borderColor: "#4A63F3",
+  },
+
+  digitalName: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: "700",
+  },
+
+  digitalCourse: {
+    fontSize: 14,
+    color: "#666",
+  },
+
+  digitalReg: {
+    fontSize: 14,
+    color: "#777",
+  },
+
+  validText: {
+    marginTop: 20,
+    textAlign: "center",
+    color: "#555",
+  },
+
+  barcodeBox: {
+    marginTop: 15,
+    marginBottom: 25,
+    alignSelf: "center",
+    backgroundColor: "#D9DCF5",
+    borderRadius: 8,
+    padding: 8,
+  },
+
+  barcode: {
+    width: 180,
+    height: 35,
+    backgroundColor: "#4259FA",
+  },
+  //Drawer
+  overlay: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.2)",
+  },
+
+  drawer: {
+    width: 250,
+
+    margin: 10,
+    marginTop: 30,
+    borderRadius: 20,
+    height: 700,
+    backgroundColor: "#fff",
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
+    paddingTop: 60,
+    paddingHorizontal: 20,
+    elevation: 20,
+  },
+
+  drawerHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 30,
+  },
+
+  drawerLogo: {
+    width: 28,
+    height: 28,
+    marginRight: 10,
+  },
+
+  drawerTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#5266d6",
+  },
+  //Dashboard
+  menuItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+
+    marginBottom: 8,
+  },
+
+  activeMenu: {
+    backgroundColor: "#EEF1FF",
+  },
+
+  menuText: {
+    marginLeft: 15,
+    fontSize: 15,
+    color: "#6F7685",
+  },
+
+  logoutBtn: {
+    marginTop: 30,
+    backgroundColor: "#4A63F3",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 12,
+    borderRadius: 12,
+  },
+
+  logoutText: {
+    color: "#fff",
+    marginLeft: 8,
+    fontWeight: "600",
+  },
 });

@@ -1,22 +1,19 @@
 import { useRouter } from "expo-router"; // ADDED: Import the router
-import { useState,useRef } from "react";
+import { useRef, useState } from "react";
 import {
+  Animated,
   FlatList,
-  Image,
-  Platform,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import DrawerMenu from "./components/DrawerMenu";
-import { Animated } from "react-native";
-import Header from "./components/Header";
 
+import DrawerMenu from "./components/DrawerMenu";
+import Header from "./components/Header";
 // 1. DYNAMIC DATA STRUCTURE
 // You can easily replace this with data fetched from your backend
 const initialData = [
@@ -51,7 +48,7 @@ const initialData = [
 ];
 
 const Documents = () => {
-  
+
   //DrawerMenu
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerAnim = useRef(new Animated.Value(-260)).current;
@@ -109,15 +106,13 @@ const Documents = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-
-          {/* HEADER COMPONENT */}
-         <Header openDrawer={openDrawer} />
-
+        {/* TOP HEADER */}
+        <Header openDrawer={openDrawer}/>
 
         {/* TITLE SECTION */}
         <View style={styles.titleSection}>
           <Text style={styles.pageTitle}>My Documents</Text>
-          <TouchableOpacity style={styles.backButton} onPress={()=>router.back()}>
+          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
             <Ionicons name="arrow-back" size={16} color="#5C6BC0" />
             <Text style={styles.backText}>Back to Dashboard</Text>
           </TouchableOpacity>
@@ -150,7 +145,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#EEF2FF", // Light purple/blue background
-    
+
   },
   container: {
     flex: 1,

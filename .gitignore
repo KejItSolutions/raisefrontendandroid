@@ -1,7 +1,8 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
-node_modules/
+package-lock.json
+package.json
 
 # Expo
 .expo/
@@ -41,3 +42,19 @@ app-example
 # generated native folders
 /ios
 /android
+
+# dependencies
+node_modules/
+
+# expo
+.expo/
+
+# build
+dist/
+web-build/
+
+# env
+.env
+
+# OS
+.DS_Store
