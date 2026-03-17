@@ -107,26 +107,7 @@ const Documents = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         {/* TOP HEADER */}
-        <View style={styles.header}>
-          <Image
-            source={require("../assets/images/logo.png")}
-            style={styles.headerLogo}
-            resizeMode="contain"
-          />
-          <View style={styles.headerRight}>
-            <Ionicons
-              name="notifications-outline"
-              size={24}
-              color="#333"
-              style={styles.headerIcon}
-            />
-            <Image
-              source={{ uri: "https://i.pravatar.cc/100" }} // Placeholder avatar
-              style={styles.avatar}
-            />
-            <Ionicons name="ellipsis-vertical" size={24} color="#333" />
-          </View>
-        </View>
+        <Header openDrawer={openDrawer}/>
 
         {/* TITLE SECTION */}
         <View style={styles.titleSection}>
@@ -170,7 +151,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
-
+  
   //   flexDirection: "row",
   //   justifyContent: "space-between",
   //   alignItems: "center",

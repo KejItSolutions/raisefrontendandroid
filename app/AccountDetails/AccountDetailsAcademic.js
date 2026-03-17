@@ -5,29 +5,32 @@ import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
 import { Animated, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-
+import Header from "../components/Header";
+import DrawerMenu from "../components/DrawerMenu";
 export default function AccountDetailsScreen() {
 
     const router = useRouter();
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const drawerAnim = useRef(new Animated.Value(-260)).current;
     const [activeTab, setActiveTab] = useState("overall");
 
+   // Drawer Menu State
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const drawerAnim = useRef(new Animated.Value(-260)).current;
+
     const openDrawer = () => {
-        setDrawerOpen(true);
-        Animated.timing(drawerAnim, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true,
-        }).start();
+    setDrawerOpen(true);
+    Animated.timing(drawerAnim, {
+    toValue: 0,
+    duration: 300,
+    useNativeDriver: true,
+    }).start();
     };
 
     const closeDrawer = () => {
-        Animated.timing(drawerAnim, {
-            toValue: -260,
-            duration: 250,
-            useNativeDriver: true,
-        }).start(() => setDrawerOpen(false));
+    Animated.timing(drawerAnim, {
+    toValue: -260,
+    duration: 250,
+    useNativeDriver: true,
+    }).start(() => setDrawerOpen(false));
     };
 
     const [student] = useState({
@@ -115,33 +118,14 @@ export default function AccountDetailsScreen() {
         <View style={{ flex: 1 }}>
             <ScrollView style={styles.container}>
 
-                {/* NAVBAR */}
-                <View style={styles.headerCard}>
-
-                    <TouchableOpacity onPress={openDrawer}>
-                        <Image
-                            source={require("../../assets/images/Logo.png")}
-                            style={{ width: 50, height: 50 }}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-
-                    <View style={styles.headerRight}>
-                        <Feather name="bell" size={24} color="#444" />
-
-                        <Image
-                            source={{ uri: student.avatar }}
-                            style={styles.headerAvatar}
-                        />
-
-                        <Feather name="more-vertical" size={26} color="#444" />
-                    </View>
-
-                </View>
+             {/* Header */}
+              <Header openDrawer={openDrawer} />
 
                 <Text style={styles.title}>Account Details</Text>
-
-                <Text style={styles.back}>← Back to Dashboard</Text>
+                <TouchableOpacity onPress={()=>router.back()}>
+                    <Text style={styles.back}>← Back to Dashboard</Text>
+                </TouchableOpacity>
+                
 
                 <View style={styles.cardWrapper}>
 
@@ -334,130 +318,18 @@ export default function AccountDetailsScreen() {
 
                     ))
                 }
-                {/* Drawer */}
-                {drawerOpen && (
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={styles.overlay}
-                        onPress={closeDrawer}
-                    >
-                        <Animated.View
-                            style={[styles.drawer, { transform: [{ translateX: drawerAnim }] }]}
-                        >
-                            {/* Header */}
-                            <View style={styles.drawerHeader}>
-                                <Image
-                                    source={require("../../assets/images/watermark.png")}
-                                    style={styles.drawerLogo}
-                                />
-                                <Text style={styles.drawerTitle}>Classroom</Text>
-                            </View>
-
-                            {/* Menu */}
-                            {menuItems.map((item, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    style={[styles.menuItem, index === 0 && styles.activeMenu]}
-                                    onPress={() => {
-                                        if (item.name === "Dashboard") {
-                                            router.push("/Dashboard");
-                                        }
-                                        closeDrawer();
-                                    }}
-                                >
-                                    <Feather
-                                        name={item.icon}
-                                        size={20}
-                                        color={index === 0 ? "#4A63F3" : "#7B8190"}
-                                    />
-
-                                    <Text
-                                        style={[styles.menuText, index === 0 && { color: "#4A63F3" }]}
-                                    >
-                                        {item.name}
-                                    </Text>
-                                </TouchableOpacity>
-                            ))}
-
-                            {/* Logout */}
-                            <TouchableOpacity style={styles.logoutBtn}>
-                                <Feather name="log-out" size={18} color="#fff" />
-                                <Text style={styles.logoutText}>Logout</Text>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    </TouchableOpacity>
-                )}
 
             </ScrollView>
 
-            {/* sidebar */}
-            {/* Drawer */}
-            {drawerOpen && (
-                <View style={StyleSheet.absoluteFill}>
+            
 
-                    {/* Overlay */}
-                    <TouchableOpacity
-                        style={styles.overlay}
-                        activeOpacity={1}
-                        onPress={closeDrawer}
-                    />
-
-                    {/* Drawer Panel */}
-                    <Animated.View
-                        style={[
-                            styles.drawer,
-                            { transform: [{ translateX: drawerAnim }] }
-                        ]}
-                    >
-
-                        {/* Header */}
-                        <View style={styles.drawerHeader}>
-                            <Image
-                                source={require("../../assets/images/watermark.png")}
-                                style={styles.drawerLogo}
-                            />
-                            <Text style={styles.drawerTitle}>Classroom</Text>
-                        </View>
-
-                        {/* Menu */}
-                        {menuItems.map((item, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                style={[
-                                    styles.menuItem,
-                                    index === 0 && styles.activeMenu
-                                ]}
-                                onPress={() => {
-                                    closeDrawer();
-                                }}
-                            >
-                                <Feather
-                                    name={item.icon}
-                                    size={20}
-                                    color={index === 0 ? "#4A63F3" : "#7B8190"}
-                                />
-
-                                <Text
-                                    style={[
-                                        styles.menuText,
-                                        index === 0 && { color: "#4A63F3" }
-                                    ]}
-                                >
-                                    {item.name}
-                                </Text>
-                            </TouchableOpacity>
-                        ))}
-
-                        {/* Logout */}
-                        <TouchableOpacity style={styles.logoutBtn}>
-                            <Feather name="log-out" size={18} color="#fff" />
-                            <Text style={styles.logoutText}>Logout</Text>
-                        </TouchableOpacity>
-
-                    </Animated.View>
-
-                </View>
-            )}
+            {/* Drawer Menu */}
+              <DrawerMenu
+                drawerOpen={drawerOpen}
+                closeDrawer={closeDrawer}
+                drawerAnim={drawerAnim}
+                router={router}
+              />
         </View>
 
     )

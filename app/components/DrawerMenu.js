@@ -13,7 +13,7 @@ export default function DrawerMenu({ drawerOpen, closeDrawer, drawerAnim }) {
     { name: "Academics", icon: "book-open", route: "/Academics" },
     { name: "Maps", icon: "map-pin", route: "/Maps" },
     { name: "Careers", icon: "target", route: "/Career" },
-    { name: "Events", icon: "award", route: "/Event" },
+    { name: "Events", icon: "award", route: "/Events" },
     { name: "Sports&Athletics", icon: "activity", route: "/SportsAthletics" },
     { name: "Feedback", icon: "message-square", route: "/Feedback" },
   ];
@@ -68,7 +68,9 @@ const styles = StyleSheet.create({
     position:"absolute",
     width:"100%",
     height:"100%",
-    backgroundColor:"rgba(0,0,0,0.2)"
+    backgroundColor:"rgba(0,0,0,0.2)",       
+    elevation:999 ,
+    zIndex:999, 
   },
 
   drawer:{
@@ -76,7 +78,12 @@ const styles = StyleSheet.create({
     height:hp("100%"),
     backgroundColor:"#fff",
     paddingTop:60,
-    paddingHorizontal:20
+    paddingHorizontal:20,
+    position:"absolute",  // important
+    left:0,
+    top:0,
+    zIndex:1000,
+    elevation:1000
   },
 
   drawerHeader:{
