@@ -1,20 +1,20 @@
 import { useRef, useState } from "react";
 import {
-  Animated,
-  Dimensions,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+Animated,
+Dimensions,
+Image,
+SafeAreaView,
+ScrollView,
+StyleSheet,
+Text,
+TouchableOpacity,
+View,
 } from "react-native";
-
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import DrawerMenu from "./components/DrawerMenu";
 import Header from "./components/Header";
+import { useRouter } from "expo-router";
+
 
 const { width } = Dimensions.get("window");
 
@@ -22,25 +22,25 @@ export default function Dashboard() {
 const router = useRouter();
 
 // Drawer Menu State
-const [drawerOpen, setDrawerOpen] = useState(false);
-const drawerAnim = useRef(new Animated.Value(-260)).current;
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const drawerAnim = useRef(new Animated.Value(-260)).current;
 
-const openDrawer = () => {
-setDrawerOpen(true);
-Animated.timing(drawerAnim, {
-toValue: 0,
-duration: 300,
-useNativeDriver: true,
-}).start();
-};
+    const openDrawer = () => {
+    setDrawerOpen(true);
+    Animated.timing(drawerAnim, {
+    toValue: 0,
+    duration: 300,
+    useNativeDriver: true,
+    }).start();
+    };
 
-const closeDrawer = () => {
-Animated.timing(drawerAnim, {
-toValue: -260,
-duration: 250,
-useNativeDriver: true,
-}).start(() => setDrawerOpen(false));
-};
+    const closeDrawer = () => {
+    Animated.timing(drawerAnim, {
+    toValue: -260,
+    duration: 250,
+    useNativeDriver: true,
+    }).start(() => setDrawerOpen(false));
+    };
 
 return ( 
 <SafeAreaView style={styles.container}> 
@@ -85,7 +85,7 @@ return (
       {/* Certificates Card */}
       <TouchableOpacity
         style={styles.largeCard}
-        onPress={() => router.push("/Certificates")}
+        onPress={() => router.push("/CertificationCourses")}
       >
         <Text style={styles.cardText}>Certificates</Text>
         <Text style={styles.cardSubText}>Courses</Text>
@@ -99,7 +99,7 @@ return (
     </View>
 
     {/* Leave Request */}
-    <TouchableOpacity style={styles.leaveCard}>
+    <TouchableOpacity style={styles.leaveCard} onPress={()=>router.push("/LeaveRequestScreen")}>
       <Image
         source={require("../assets/images/Leavechat.png")}
         style={{ width: 22, height: 22 }}
@@ -133,7 +133,7 @@ return (
     </View>
 
     {/* Account Details */}
-    <TouchableOpacity style={styles.accountCard}>
+    <TouchableOpacity style={styles.accountCard} onPress={()=>router.push("./AccountDetails/AccountDetailsAcademic")}>
       <Ionicons name="person-outline" size={20} color="red" />
       <Text style={styles.accountText}>Account Details</Text>
     </TouchableOpacity>
@@ -302,4 +302,6 @@ elevation: 3,
 accountText: {
 marginLeft: 10,
 },
+
+
 });

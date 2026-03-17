@@ -19,8 +19,10 @@ import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
+import { useRouter} from "expo-router";
 
 export default function FeedbackScreen() {
+  const router =useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerAnim = useRef(new Animated.Value(-260)).current;
 
@@ -79,7 +81,7 @@ export default function FeedbackScreen() {
           <Text style={styles.headerTitle}>Feedback</Text>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>router.push("/Dashboard")}>
           <Text style={styles.back}>← Back</Text>
         </TouchableOpacity>
 

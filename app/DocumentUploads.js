@@ -1,6 +1,6 @@
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router"; // ADDED: Import the router
-import { useState } from "react";
+import { useState,useRef } from "react";
 import {
   Platform,
   ScrollView,
@@ -8,8 +8,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Animated,
 } from "react-native";
+import DrawerMenu from "./components/DrawerMenu";
+import Header from "./components/Header";
 // --- DYNAMIC DATA STRUCTURES ---
 // You can easily replace these with data from Fetch or Axios calls
 const initialDigiLockerDocs = [
@@ -87,27 +90,16 @@ export default function DocumentUploads() {
 
   return (
     <View style={styles.mainWrapper}>
-      {/* TOP HEADER */}
-      <View style={styles.header}>
-        <Image
-          source={require("../assets/images/Logo.png")}
-          style={styles.headerLogo}
-          resizeMode="contain"
-        />
-        <View style={styles.headerRight}>
-          <Ionicons
-            name="notifications-outline"
-            size={24}
-            color="#333"
-            style={styles.headerIcon}
-          />
-          <Image
-            source={{ uri: "https://i.pravatar.cc/100" }}
-            style={styles.avatar}
-          />
-          <Ionicons name="ellipsis-vertical" size={24} color="#333" />
-        </View>
-      </View>
+      
+      {/* Drawer Menu */}
+      <DrawerMenu
+        drawerOpen={drawerOpen}
+        closeDrawer={closeDrawer}
+        drawerAnim={drawerAnim}
+        
+        router={router}
+      />
+      <Header openDrawer={openDrawer}/>
 
       {/* SCROLLABLE CONTENT */}
       <ScrollView
