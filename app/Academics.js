@@ -72,8 +72,10 @@ export default function Academics() {
 
 
                 <Text style={styles.title}>Academics</Text>
-
-                <Text style={styles.back}>← Back</Text>
+                <TouchableOpacity onPress={()=>router.back()}>
+                    <Text style={styles.back}>← Back</Text>
+                </TouchableOpacity>
+                
 
                 {/* Tabs */}
                 <View style={styles.tabs}>
@@ -322,14 +324,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#eaeff9",
-        padding: 16,
-        marginTop: -35
+        padding: 16
     },
 
     title: {
         fontSize: 22,
         fontWeight: "bold",
-        marginTop: -12
     },
 
     back: {

@@ -5,29 +5,32 @@ import { useRouter } from "expo-router";
 import { useRef, useState } from "react";
 import { Animated, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-
+import Header from "../components/Header";
+import DrawerMenu from "../components/DrawerMenu";
 export default function AccountDetailsScreen() {
 
     const router = useRouter();
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const drawerAnim = useRef(new Animated.Value(-260)).current;
     const [activeTab, setActiveTab] = useState("overall");
 
+   // Drawer Menu State
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const drawerAnim = useRef(new Animated.Value(-260)).current;
+
     const openDrawer = () => {
-        setDrawerOpen(true);
-        Animated.timing(drawerAnim, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true,
-        }).start();
+    setDrawerOpen(true);
+    Animated.timing(drawerAnim, {
+    toValue: 0,
+    duration: 300,
+    useNativeDriver: true,
+    }).start();
     };
 
     const closeDrawer = () => {
-        Animated.timing(drawerAnim, {
-            toValue: -260,
-            duration: 250,
-            useNativeDriver: true,
-        }).start(() => setDrawerOpen(false));
+    Animated.timing(drawerAnim, {
+    toValue: -260,
+    duration: 250,
+    useNativeDriver: true,
+    }).start(() => setDrawerOpen(false));
     };
 
     const [student] = useState({
@@ -100,48 +103,29 @@ export default function AccountDetailsScreen() {
         { title: "Tuition fee", sub: "Semester 01", amount: "₹80,000", date: "17 Sep 2023" },
     ];
 
-    const menuItems = [
-        { name: "Dashboard", icon: "grid" },
-        { name: "Academics", icon: "book-open" },
-        { name: "Maps", icon: "map-pin" },
-        { name: "Careers", icon: "target" },
-        { name: "Events", icon: "award" },
-        { name: "Sports & Athletics", icon: "activity" },
-        { name: "Feedback", icon: "message-square" },
-    ];
+    // const menuItems = [
+    //     { name: "Dashboard", icon: "grid" },
+    //     { name: "Academics", icon: "book-open" },
+    //     { name: "Maps", icon: "map-pin" },
+    //     { name: "Careers", icon: "target" },
+    //     { name: "Events", icon: "award" },
+    //     { name: "Sports & Athletics", icon: "activity" },
+    //     { name: "Feedback", icon: "message-square" },
+    // ];
 
     return (
 
         <View style={{ flex: 1 }}>
             <ScrollView style={styles.container}>
 
-                {/* NAVBAR */}
-                <View style={styles.headerCard}>
-
-                    <TouchableOpacity onPress={openDrawer}>
-                        <Image
-                            source={require("../../assets/images/Logo.png")}
-                            style={{ width: 50, height: 50 }}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-
-                    <View style={styles.headerRight}>
-                        <Feather name="bell" size={24} color="#444" />
-
-                        <Image
-                            source={{ uri: student.avatar }}
-                            style={styles.headerAvatar}
-                        />
-
-                        <Feather name="more-vertical" size={26} color="#444" />
-                    </View>
-
-                </View>
+             {/* Header */}
+              <Header openDrawer={openDrawer} />
 
                 <Text style={styles.title}>Account Details</Text>
-
-                <Text style={styles.back}>← Back to Dashboard</Text>
+                <TouchableOpacity onPress={()=>router.back()}>
+                    <Text style={styles.back}>← Back to Dashboard</Text>
+                </TouchableOpacity>
+                
 
                 <View style={styles.cardWrapper}>
 
@@ -334,130 +318,18 @@ export default function AccountDetailsScreen() {
 
                     ))
                 }
-                {/* Drawer */}
-                {drawerOpen && (
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        style={styles.overlay}
-                        onPress={closeDrawer}
-                    >
-                        <Animated.View
-                            style={[styles.drawer, { transform: [{ translateX: drawerAnim }] }]}
-                        >
-                            {/* Header */}
-                            <View style={styles.drawerHeader}>
-                                <Image
-                                    source={require("../../assets/images/watermark.png")}
-                                    style={styles.drawerLogo}
-                                />
-                                <Text style={styles.drawerTitle}>Classroom</Text>
-                            </View>
-
-                            {/* Menu */}
-                            {menuItems.map((item, index) => (
-                                <TouchableOpacity
-                                    key={index}
-                                    style={[styles.menuItem, index === 0 && styles.activeMenu]}
-                                    onPress={() => {
-                                        if (item.name === "Dashboard") {
-                                            router.push("/Dashboard");
-                                        }
-                                        closeDrawer();
-                                    }}
-                                >
-                                    <Feather
-                                        name={item.icon}
-                                        size={20}
-                                        color={index === 0 ? "#4A63F3" : "#7B8190"}
-                                    />
-
-                                    <Text
-                                        style={[styles.menuText, index === 0 && { color: "#4A63F3" }]}
-                                    >
-                                        {item.name}
-                                    </Text>
-                                </TouchableOpacity>
-                            ))}
-
-                            {/* Logout */}
-                            <TouchableOpacity style={styles.logoutBtn}>
-                                <Feather name="log-out" size={18} color="#fff" />
-                                <Text style={styles.logoutText}>Logout</Text>
-                            </TouchableOpacity>
-                        </Animated.View>
-                    </TouchableOpacity>
-                )}
 
             </ScrollView>
 
-            {/* sidebar */}
-            {/* Drawer */}
-            {drawerOpen && (
-                <View style={StyleSheet.absoluteFill}>
+            
 
-                    {/* Overlay */}
-                    <TouchableOpacity
-                        style={styles.overlay}
-                        activeOpacity={1}
-                        onPress={closeDrawer}
-                    />
-
-                    {/* Drawer Panel */}
-                    <Animated.View
-                        style={[
-                            styles.drawer,
-                            { transform: [{ translateX: drawerAnim }] }
-                        ]}
-                    >
-
-                        {/* Header */}
-                        <View style={styles.drawerHeader}>
-                            <Image
-                                source={require("../../assets/images/watermark.png")}
-                                style={styles.drawerLogo}
-                            />
-                            <Text style={styles.drawerTitle}>Classroom</Text>
-                        </View>
-
-                        {/* Menu */}
-                        {menuItems.map((item, index) => (
-                            <TouchableOpacity
-                                key={index}
-                                style={[
-                                    styles.menuItem,
-                                    index === 0 && styles.activeMenu
-                                ]}
-                                onPress={() => {
-                                    closeDrawer();
-                                }}
-                            >
-                                <Feather
-                                    name={item.icon}
-                                    size={20}
-                                    color={index === 0 ? "#4A63F3" : "#7B8190"}
-                                />
-
-                                <Text
-                                    style={[
-                                        styles.menuText,
-                                        index === 0 && { color: "#4A63F3" }
-                                    ]}
-                                >
-                                    {item.name}
-                                </Text>
-                            </TouchableOpacity>
-                        ))}
-
-                        {/* Logout */}
-                        <TouchableOpacity style={styles.logoutBtn}>
-                            <Feather name="log-out" size={18} color="#fff" />
-                            <Text style={styles.logoutText}>Logout</Text>
-                        </TouchableOpacity>
-
-                    </Animated.View>
-
-                </View>
-            )}
+            {/* Drawer Menu */}
+              <DrawerMenu
+                drawerOpen={drawerOpen}
+                closeDrawer={closeDrawer}
+                drawerAnim={drawerAnim}
+                router={router}
+              />
         </View>
 
     )
@@ -703,4 +575,79 @@ const styles = StyleSheet.create({
         tintColor: "#fff"
     },
 
+    // sidebar styles
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: "rgba(0,0,0,0.45)"
+    },
+
+    drawer: {
+        position: "absolute",
+        left: 10,
+        top: 10,
+        bottom: 40,
+        width: 230,
+        height: 700,
+        backgroundColor: "#fff",
+        borderRadius: 30,
+        paddingTop: 25,
+        paddingHorizontal: 20,
+        // elevation: 20
+    },
+
+    drawerHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: 30
+    },
+
+    drawerLogo: {
+        width: 35,
+        height: 35,
+        marginRight: 10,
+        resizeMode: "contain"
+    },
+
+    drawerTitle: {
+        fontSize: 18,
+        fontWeight: "600",
+        color: "#4A63F5"
+    },
+
+    menuItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: 14,
+        paddingHorizontal: 12,
+        borderRadius: 12,
+        marginBottom: 8
+    },
+
+    menuText: {
+        fontSize: 15,
+        marginLeft: 14,
+        color: "#7B8190",
+        fontWeight: "500"
+    },
+
+    activeMenu: {
+        backgroundColor: "#EEF1FF"
+    },
+
+    logoutBtn: {
+        backgroundColor: "#4A63F5",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 14,
+        borderRadius: 14,
+        marginBottom: 20
+    },
+
+    logoutText: {
+        color: "#fff",
+        marginLeft: 8,
+        fontWeight: "600",
+        fontSize: 14
+    }
 });

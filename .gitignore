@@ -1,12 +1,15 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
+package-lock.json
+package.json
 
 # Expo
 .expo/
 dist/
 web-build/
 expo-env.d.ts
+
 
 # Native
 .kotlin/
@@ -40,4 +43,22 @@ app-example
 # generated native folders
 /ios
 /android
+
 node_modules
+
+
+# dependencies
+node_modules/
+
+# expo
+.expo/
+
+# build
+dist/
+web-build/
+
+# env
+.env
+
+# OS
+.DS_Store 0bf968f894c0cc3c814e998b2ef5a8c26f6ec2a5

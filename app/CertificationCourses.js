@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { ArrowLeft, Bell, MoreVertical } from 'lucide-react-native';
+import { useState,useRef } from 'react';
 import {
   FlatList,
   Image,
@@ -7,14 +8,16 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Animated
 } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
+import DrawerMenu from './components/DrawerMenu';
+import Header from './components/Header';
 const COLORS = {
   primary: '#4259FA',
   background: '#F3F6FF',
@@ -48,6 +51,26 @@ const DATA = [
 
 export default function CertificationScreen() {
   const router = useRouter();
+  // Drawer Menu State
+      const [drawerOpen, setDrawerOpen] = useState(false);
+      const drawerAnim = useRef(new Animated.Value(-260)).current;
+  
+      const openDrawer = () => {
+      setDrawerOpen(true);
+      Animated.timing(drawerAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+      }).start();
+      };
+  
+      const closeDrawer = () => {
+      Animated.timing(drawerAnim, {
+      toValue: -260,
+      duration: 250,
+      useNativeDriver: true,
+      }).start(() => setDrawerOpen(false));
+      };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity 
@@ -75,27 +98,19 @@ export default function CertificationScreen() {
 
   return (
     <SafeAreaProvider>
+      
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-        <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
+        {/* <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} /> */}
         
-        {/* Header Bar */}
-        <View style={styles.header}>
-          <View style={styles.headerBox}>
-            <Image 
-              source={require('../assets/images/Logo.png')} 
-              style={styles.logo} 
-              resizeMode="contain"
-            />
-            <View style={styles.headerRight}>
-              <Bell color="#000" size={wp('6%')} style={{ marginRight: wp('3%') }} />
-              <Image 
-                source={{ uri: 'https://i.pravatar.cc/150?u=student123' }} 
-                style={styles.avatar} 
-              />
-              <MoreVertical color="#000" size={wp('6%')} />
-            </View>
-          </View>
-        </View>
+        {/* Drawer Menu */}
+        <DrawerMenu
+          drawerOpen={drawerOpen}
+          closeDrawer={closeDrawer}
+          drawerAnim={drawerAnim}
+          router={router}
+        />
+        {/* Header */}
+        <Header openDrawer={openDrawer} />
 
         <Text style={styles.mainTitle}>Certification Courses</Text>
         
@@ -126,38 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background, 
     paddingHorizontal: wp('5%') 
   },
-  header: { 
-    marginTop: hp('1.5%'), 
-    marginBottom: hp('1%') 
-  },
-  headerBox: { 
-    backgroundColor: '#FFF', 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    padding: wp('4%'), 
-    borderRadius: wp('5%'),
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5
-  },
-  headerRight: { 
-    flexDirection: 'row', 
-    alignItems: 'center' 
-  },
-  logo: { 
-    width: wp('10%'), 
-    height: wp('10%') 
-  },
-  avatar: { 
-    width: wp('9%'), 
-    height: wp('9%'), 
-    borderRadius: wp('4.5%'), 
-    marginHorizontal: wp('3%'),
-    backgroundColor: '#eee' 
-  },
+
   mainTitle: { 
     fontSize: wp('5.5%'), 
     fontWeight: 'bold', 
