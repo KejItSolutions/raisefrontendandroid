@@ -142,10 +142,10 @@ export default function CareerScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* HEADER */}
+      {/* HEADER */}
         <Header openDrawer={openDrawer} />
-        <Text style={styles.header}>Career</Text>
+
+         <Text style={styles.header}>Career</Text>
         <TouchableOpacity onPress={()=>router.back()}>
           <Text style={styles.back}>← Back</Text>
         </TouchableOpacity>
@@ -200,6 +200,9 @@ export default function CareerScreen() {
             </Text>
           </TouchableOpacity>
         </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        
+       
 
         {/* CONTENT */}
 

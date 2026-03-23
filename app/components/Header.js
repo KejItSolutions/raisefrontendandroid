@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { Image, Platform, StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Ionicons from "react-native-vector-icons/Ionicons";
-
+import { Pressable } from "react-native";
 const Header = ({ openDrawer }) => {
 
   const router = useRouter();
@@ -19,7 +19,7 @@ const Header = ({ openDrawer }) => {
 
       <View style={styles.headerRight}>
         <TouchableOpacity
-          onPress={() => router.push("/Notifications")}
+          onPress={() => router.push("/HeaderScreens/Notifications")}
         >
           <Ionicons
             name="notifications-outline"
@@ -28,13 +28,17 @@ const Header = ({ openDrawer }) => {
             style={styles.headerIcon}
           />
         </TouchableOpacity>
-
-        <Image
+        <TouchableOpacity onPress={()=>router.push("/HeaderScreens/StudentProfile")}>
+          <Image
           source={{ uri: "https://i.pravatar.cc/100" }}
           style={styles.avatar}
         />
-
-        <Ionicons name="ellipsis-vertical" size={24} color="#333" />
+        </TouchableOpacity>
+        
+        <Pressable onPress={()=>router.push("/Settings/SettingsRoutes")}>
+          <Ionicons name="ellipsis-vertical" size={24} color="#333" />
+        </Pressable>
+        
       </View>
     </View>
   );
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 18,
     borderRadius: 30,
-    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 30,
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
     marginBottom: 24,
   },
   headerRight: {

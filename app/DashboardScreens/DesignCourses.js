@@ -42,7 +42,7 @@ const DESIGN_DATA = [
         level: 'Advanced',
         levelColor: COLORS.advanced,
         duration: 'Duration 8 weeks',
-        icon: require('../assets/images/active.png'),
+        icon: require('../../assets/images/active.png'),
     },
     {
         id: '2',
@@ -51,7 +51,7 @@ const DESIGN_DATA = [
         level: 'Intermediate',
         levelColor: COLORS.intermediate,
         duration: 'Duration 6 weeks',
-        icon: require('../assets/images/active.png'),
+        icon: require('../../assets/images/active.png'),
     },
     {
         id: '3',
@@ -60,7 +60,7 @@ const DESIGN_DATA = [
         level: 'Beginner',
         levelColor: COLORS.beginner,
         duration: 'Duration 12 weeks',
-        icon: require('../assets/images/active.png'),
+        icon: require('../../assets/images/active.png'),
     },
 ];
 
@@ -138,7 +138,7 @@ export default function DesignCourses() {
                 
                 {/* Unified Responsive Header */}
                 <View style={styles.headerBox}>
-                    <Image source={require('../assets/images/Logo.png')} style={styles.logo} resizeMode="contain" />
+                    <Image source={require('../../assets/images/Logo.png')} style={styles.logo} resizeMode="contain" />
                     <View style={styles.headerRight}>
                         <Bell color="#000" size={wp('6%')} style={{ marginRight: wp('3%') }} />
                         <Image source={{ uri: 'https://i.pravatar.cc/150?u=2' }} style={styles.avatar} />

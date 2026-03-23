@@ -5,8 +5,8 @@ import { useRef, useState } from "react";
 import { Animated, Image, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { WebView } from "react-native-webview";
-import Drawermenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import Drawermenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 export default function Maps() {
 
@@ -105,7 +105,7 @@ export default function Maps() {
                                 styles.inactiveBtn,
                                 activeTab === "navigation" && styles.activeBtn
                             ]}
-                            onPress={() => setActiveTab("navigation")}
+                            onPress={() => router.push("/DrawerMenuScreens/MapsCampus")}
                         >
                             <Text
                                 style={
@@ -599,7 +599,7 @@ const styles = StyleSheet.create({
     id: {
         color: "#8A8F9C",
         fontSize: hp('1.8%'),
-        marginTop: hp(" 1%")
+        marginTop: hp("1%")
 
     },
 
@@ -717,7 +717,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         position: "absolute",
 
-        left: wp("-1.3%") - wp("2%"),   // center minus radius
+        left: wp("-3.3%"),   // center minus radius
         top: hp("0.3%"),
     },
 
