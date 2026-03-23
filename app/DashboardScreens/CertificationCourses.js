@@ -16,8 +16,8 @@ import {
   widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import DrawerMenu from './components/DrawerMenu';
-import Header from './components/Header';
+import DrawerMenu from '../components/DrawerMenu';
+import Header from '../components/Header';
 const COLORS = {
   primary: '#4259FA',
   background: '#F3F6FF',
@@ -30,22 +30,22 @@ const DATA = [
   { 
     id: '1', 
     title: 'Technical Courses', 
-    imageIcon: require('../assets/images/mingcute_code-line.png') 
+    imageIcon: require('../../assets/images/mingcute_code-line.png') 
   },
   { 
     id: '2', 
     title: 'Design Courses', 
-    imageIcon: require('../assets/images/fluent-color_design-ideas-24.png') 
+    imageIcon: require('../../assets/images/fluent-color_design-ideas-24.png') 
   },
   { 
     id: '3', 
     title: 'Finance & Accounting', 
-    imageIcon: require('../assets/images/mdi_finance.png') 
+    imageIcon: require('../../assets/images/mdi_finance.png') 
   },
   { 
     id: '4', 
     title: 'Soft Skills', 
-    imageIcon: require('../assets/images/carbon_ibm-software-watsonx-data-unstructured-enrichment.png') 
+    imageIcon: require('../../assets/images/carbon_ibm-software-watsonx-data-unstructured-enrichment.png') 
   },
 ];
 

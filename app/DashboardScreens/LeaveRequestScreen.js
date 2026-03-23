@@ -19,8 +19,8 @@ import {
 } from "react-native-responsive-screen";
 
 import Icon from "react-native-vector-icons/Feather";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 import { useRouter } from "expo-router";
 
 export default function LeaveRequestScreen() {
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#ECEFF7"
+    backgroundColor: "#ECEFF7",
   },
 
   titleContainer: {

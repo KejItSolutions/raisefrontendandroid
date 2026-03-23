@@ -13,13 +13,15 @@ import {
 } from "react-native";
 import DrawerMenu from "../components/DrawerMenu";
 import Header from "../components/Header";
-
+import { useRouter} from "expo-router";
 import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
+import { useRoute } from "@react-navigation/native";
 
 export default function CareerScreen() {
+  const router=useRouter();
   const [activeTab, setActiveTab] = useState("placements");
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -144,7 +146,10 @@ export default function CareerScreen() {
         {/* HEADER */}
         <Header openDrawer={openDrawer} />
         <Text style={styles.header}>Career</Text>
-        <Text style={styles.back}>← Back</Text>
+        <TouchableOpacity onPress={()=>router.back()}>
+          <Text style={styles.back}>← Back</Text>
+        </TouchableOpacity>
+        
 
         {/* TABS */}
 

@@ -11,8 +11,8 @@ import {
   View,
   Animated,
 } from "react-native";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../../components/DrawerMenu";
+import Header from "../../components/Header";
 // --- DYNAMIC DATA STRUCTURES ---
 // You can easily replace these with data from Fetch or Axios calls
 const initialDigiLockerDocs = [
@@ -101,24 +101,25 @@ export default function DocumentUploads() {
       />
       <Header openDrawer={openDrawer}/>
 
+      
+      
+        {/* TITLE SECTION */}
+      <View style={styles.titleSection}>
+        <Text style={styles.pageTitle}>My Documents</Text>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()} // ADDED: Navigate back when clicked
+        >
+          <Ionicons name="arrow-back" size={16} color="#5C6BC0" />
+          <Text style={styles.backText}>Back to My documents</Text>
+        </TouchableOpacity>
+      </View>
       {/* SCROLLABLE CONTENT */}
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* TITLE SECTION */}
-        <View style={styles.titleSection}>
-          <Text style={styles.pageTitle}>My Documents</Text>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => router.back()} // ADDED: Navigate back when clicked
-          >
-            <Ionicons name="arrow-back" size={16} color="#5C6BC0" />
-            <Text style={styles.backText}>Back to My documents</Text>
-          </TouchableOpacity>
-        </View>
-
         {/* DIGILOCKER INTEGRATION BANNER */}
         <View style={styles.integrationCard}>
           <Text style={styles.integrationTitle}>
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
     backgroundColor: "#EEF2FF",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 5,
+    
   },
   header: {
     flexDirection: "row",
@@ -205,6 +206,7 @@ const styles = StyleSheet.create({
   },
   titleSection: {
     marginBottom: 20,
+    marginLeft:20,
   },
   pageTitle: {
     fontSize: 22,

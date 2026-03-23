@@ -17,14 +17,14 @@ export default function DrawerMenu({ drawerOpen, closeDrawer, drawerAnim }) {
   const router = useRouter();
 
   const menuItems = [
-    { name: "Dashboard", icon: "grid", route: "/Dashboard" },
+    { name: "Dashboard", icon: "grid", route: "/DrawerMenuScreens/Dashboard" },
 
-    { name: "Academics", icon: "book-open", route: "/Academics" },
-    { name: "Maps", icon: "map-pin", route: "/Maps" },
-    { name: "Careers", icon: "target", route: "/carrer/Career" },
-    { name: "Events", icon: "award", route: "/Events" },
-    { name: "Sports&Athletics", icon: "activity", route: "/SportsAthletics" },
-    { name: "Feedback", icon: "message-square", route: "/Feedback" },
+    { name: "Academics", icon: "book-open", route: "/DrawerMenuScreens/Academics" },
+    { name: "Maps", icon: "map-pin", route: "/DrawerMenuScreens/Maps" },
+    { name: "Careers", icon: "target", route: "/DrawerMenuScreens/Career" },
+    { name: "Events", icon: "award", route: "/DrawerMenuScreens/Events" },
+    { name: "Sports&Athletics", icon: "activity", route: "/DrawerMenuScreens/SportsAthletics" },
+    { name: "Feedback", icon: "message-square", route: "/DrawerMenuScreens/Feedback" },
   ];
 
   if (!drawerOpen) return null;

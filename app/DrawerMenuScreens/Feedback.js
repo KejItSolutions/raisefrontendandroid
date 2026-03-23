@@ -12,8 +12,8 @@ import {
 } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 import {
     heightPercentageToDP as hp,
@@ -81,7 +81,7 @@ export default function FeedbackScreen() {
           <Text style={styles.headerTitle}>Feedback</Text>
         </View>
 
-        <TouchableOpacity onPress={()=>router.push("/Dashboard")}>
+        <TouchableOpacity onPress={()=>router.back()}>
           <Text style={styles.back}>← Back</Text>
         </TouchableOpacity>
 
@@ -93,7 +93,7 @@ export default function FeedbackScreen() {
 
             <View style={styles.successContainer}>
               <Image
-                source={require("../assets/images/Illustration.png")}
+                source={require("../../assets/images/Illustration.png")}
                 style={styles.successImage}
               />
 

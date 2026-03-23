@@ -13,11 +13,11 @@ import {
   View
 } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import CreateClubForm from "./CreateClub";
+import CreateClubForm from "../CreateClub";
 
 // Import your shared components
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 const EVENTS_DATA = [
   { 
@@ -28,7 +28,7 @@ const EVENTS_DATA = [
     location: "Main Auditorium", 
     count: "6-10 events", 
     color: "#F4F8FB",
-    img: require("../assets/images/fluent-color_design-ideas-24.png") 
+    img: require("../../assets/images/fluent-color_design-ideas-24.png") 
   },
   { 
     id: "2", 
@@ -38,7 +38,7 @@ const EVENTS_DATA = [
     location: "Sports complex", 
     count: "6-10 events", 
     color: "#FFF9EC",
-       img: require("../assets/images/fluent-color_design-ideas-24.png") 
+       img: require("../../assets/images/fluent-color_design-ideas-24.png") 
   },
   { 
     id: "3", 
@@ -48,7 +48,7 @@ const EVENTS_DATA = [
     location: "Main Auditorium", 
     count: "6-10 events", 
     color: "#F4F8FB",
-      img: require("../assets/images/fluent-color_design-ideas-24.png") 
+      img: require("../../assets/images/fluent-color_design-ideas-24.png") 
   },
 ];
 
@@ -172,7 +172,7 @@ export default function EventAndFeedback() {
               CLUBS_DATA.map((item) => (
                 <View key={item.id} style={styles.clubCard}>
                   <View style={styles.clubHeader}>
-                    <Image source={require("../assets/images/fluent-color_design-ideas-24.png")} style={styles.clubLogo} />
+                    <Image source={require("../../assets/images/fluent-color_design-ideas-24.png")} style={styles.clubLogo} />
                     <View style={styles.clubHeaderInfo}>
                       <Text style={styles.clubCategory}>{item.category}</Text>
                       <Text style={styles.clubTitleText}>{item.title}</Text>
