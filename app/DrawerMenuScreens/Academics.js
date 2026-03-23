@@ -1,7 +1,7 @@
 import { Animated } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";

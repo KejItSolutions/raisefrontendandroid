@@ -11,8 +11,8 @@ TouchableOpacity,
 View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 import { useRouter } from "expo-router";
 
 
@@ -60,10 +60,10 @@ return (
 
         <TouchableOpacity
           style={styles.smallCard}
-          onPress={() => router.push("/ScholarshipDetails")}
+          onPress={() => router.push("/DashboardScreens/ScholarshipDetails")}
         >
           <Image
-            source={require("../assets/images/scholarship.png")}
+            source={require("../../assets/images/scholarship.png")}
             style={styles.cardIcon}
           />
           <Text style={styles.cardText}>Scholarships</Text>
@@ -71,10 +71,10 @@ return (
 
         <TouchableOpacity
           style={styles.smallCard}
-          onPress={() => router.push("/Document")}
+          onPress={() => router.push("/DashboardScreens/DocumentScreen/Document")}
         >
           <Image
-            source={require("../assets/images/Folders.png")}
+            source={require("../../assets/images/Folders.png")}
             style={styles.cardIcon}
           />
           <Text style={styles.cardText}>My Documents</Text>
@@ -85,13 +85,13 @@ return (
       {/* Certificates Card */}
       <TouchableOpacity
         style={styles.largeCard}
-        onPress={() => router.push("/CertificationCourses")}
+        onPress={() => router.push("/DashboardScreens/CertificationCourses")}
       >
         <Text style={styles.cardText}>Certificates</Text>
         <Text style={styles.cardSubText}>Courses</Text>
 
         <Image
-          source={require("../assets/images/Certification.png")}
+          source={require("../../assets/images/Certification.png")}
           style={styles.largeIcon}
         />
       </TouchableOpacity>
@@ -99,9 +99,9 @@ return (
     </View>
 
     {/* Leave Request */}
-    <TouchableOpacity style={styles.leaveCard} onPress={()=>router.push("/LeaveRequestScreen")}>
+    <TouchableOpacity style={styles.leaveCard} onPress={()=>router.push("/DashboardScreens/LeaveRequestScreen")}>
       <Image
-        source={require("../assets/images/Leavechat.png")}
+        source={require("../../assets/images/Leavechat.png")}
         style={{ width: 22, height: 22 }}
       />
       <Text style={styles.leaveText}>Leave Request</Text>
@@ -133,7 +133,7 @@ return (
     </View>
 
     {/* Account Details */}
-    <TouchableOpacity style={styles.accountCard} onPress={()=>router.push("./AccountDetails/AccountDetailsAcademic")}>
+    <TouchableOpacity style={styles.accountCard} onPress={()=>router.push("/DashboardScreens/AccountDetails/AccountDetailsAcademic")}>
       <Ionicons name="person-outline" size={20} color="red" />
       <Text style={styles.accountText}>Account Details</Text>
     </TouchableOpacity>

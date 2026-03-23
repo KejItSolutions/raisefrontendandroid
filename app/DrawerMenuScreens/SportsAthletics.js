@@ -15,8 +15,8 @@ import Icon from "react-native-vector-icons/Feather";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { Dimensions } from "react-native";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 export default function SportsScreen() {
 
@@ -193,7 +193,7 @@ const scale = width / 375;
 
         <Text style={styles.title}>Sports & Athletics</Text>
 
-        <TouchableOpacity style={styles.back}>
+        <TouchableOpacity style={styles.back} onPress={()=>router.back()}>
           <Icon name="arrow-left" size={18} color="#4c63ff"/>
           <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>

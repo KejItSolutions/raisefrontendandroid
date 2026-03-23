@@ -43,7 +43,7 @@ export default function PaymentSuccessScreen() {
             <View style={styles.navbar}>
                 <TouchableOpacity onPress={openDrawer}>
                     <Image
-                        source={require("../../assets/images/watermark.png")}
+                        source={require("../../../assets/images/watermark.png")}
                         style={styles.logo}
                         resizeMode="contain"
                     />
@@ -69,7 +69,7 @@ export default function PaymentSuccessScreen() {
 
             <View style={styles.successIconContainer}>
                 <Image
-                    source={require("../../assets/images/SuccessIcon.png")}
+                    source={require("../../../assets/images/SuccessIcon.png")}
                     style={styles.successIcon}
                     resizeMode="contain"
                 />

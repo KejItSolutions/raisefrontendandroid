@@ -12,8 +12,8 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../../components/DrawerMenu";
+import Header from "../../components/Header";
 // 1. DYNAMIC DATA STRUCTURE
 // You can easily replace this with data fetched from your backend
 const initialData = [
@@ -88,7 +88,7 @@ const Documents = () => {
     <TouchableOpacity
       style={styles.cardContainer}
       activeOpacity={0.7}
-      onPress={() => router.push("/DocumentUploads")} // ADDED: Navigation on click
+      onPress={() => router.push("/DrawerMenuScreens/DocumentUploads")} 
     >
       <MaterialCommunityIcons
         name="folder"

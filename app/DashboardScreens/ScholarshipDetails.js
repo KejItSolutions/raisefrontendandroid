@@ -20,8 +20,8 @@ import {
 
 import { useRouter } from "expo-router";
 
-import Header from "./components/Header";
-import DrawerMenu from "./components/DrawerMenu";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 const COLORS = {
   primary: "#4259FA",
@@ -159,7 +159,7 @@ export default function ScholarshipScreen() {
 
       <TouchableOpacity
         style={styles.backButton}
-        onPress={() => router.push("/Dashboard")}
+        onPress={() => router.push("/DashboardScreens/Dashboard")}
       >
         <ArrowLeft color={COLORS.primary} size={20} />
         <Text style={styles.backText}>Back to Dashboard</Text>

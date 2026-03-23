@@ -80,7 +80,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
-          source={require("../assets/images/Logo.png")}
+          source={require("../../assets/images/Logo.png")}
           style={styles.logo}
         />
         <Text style={styles.logoText}>Classroom</Text>
@@ -155,7 +155,7 @@ export default function LoginScreen() {
           New Student?{" "}
           <Text
             style={styles.create}
-            onPress={() => router.push("/RegisterScreen")}
+            onPress={() => router.push("/LoginandRegisterScreens/RegisterScreen")}
           >
             Create Account
           </Text>

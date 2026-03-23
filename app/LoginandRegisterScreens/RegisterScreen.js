@@ -113,7 +113,7 @@ export default function RegistrationScreen() {
       setInfoMessage("Registration Successful! Redirecting...");
 
       setTimeout(() => {
-        router.push("/Document");
+        router.push("DashboardScreens/DocumentScreen/Document");
       }, 800);
 
     } else {
@@ -157,7 +157,7 @@ export default function RegistrationScreen() {
       <View style={styles.header}>
 
         <Image
-        source={require("../assets/images/Logo.png")}
+        source={require("../../assets/images/Logo.png")}
         style={styles.logo}
         />
 
