@@ -14,20 +14,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import DrawerMenu from "./components/DrawerMenu";
-import Header  from "./components/Header";
-
 const { width } = Dimensions.get("window");
 
 export default function StudentProfile() {
   const [showCard, setShowCard] = useState(false);
-  const router = useRouter();
-
-  // Drawer state
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerAnim = useRef(new Animated.Value(-260)).current;
-
+  const router = useRouter();
+  // const [screen, setScreen] = useState("dashboard");
   const openDrawer = () => {
     setDrawerOpen(true);
     Animated.timing(drawerAnim, {
@@ -44,15 +39,9 @@ export default function StudentProfile() {
       useNativeDriver: true,
     }).start(() => setDrawerOpen(false));
   };
-  const menuItems = [
-    { name: "Dashboard", icon: "grid" },
-    { name: "Academics", icon: "book-open" },
-    { name: "Maps", icon: "map-pin" },
-    { name: "Careers", icon: "target" },
-    { name: "Events", icon: "award" },
-    { name: "Sports & Athletics", icon: "activity" },
-    { name: "Feedback", icon: "message-square" },
-  ];
+
+
+
   const [student] = useState({
     name: "Evan Yates",
     email: "evanyates@gmail.com",
@@ -107,6 +96,7 @@ export default function StudentProfile() {
                 <Text style={styles.name}>{student.name}</Text>
                 <Text style={styles.email}>{student.email}</Text>
               </View>
+
               <Feather name="more-vertical" size={20} />
             </View>
 
@@ -117,6 +107,7 @@ export default function StudentProfile() {
                 <Text style={styles.label}>Birthday</Text>
                 <Text style={styles.value}>{student.birthday}</Text>
               </View>
+
               <View>
                 <Text style={styles.label}>Register No</Text>
                 <Text style={styles.value}>{student.registerNo}</Text>
@@ -128,6 +119,7 @@ export default function StudentProfile() {
                 <Text style={styles.label}>Stream</Text>
                 <Text style={styles.value}>{student.stream}</Text>
               </View>
+
               <View>
                 <Text style={styles.label}>Mobile No</Text>
                 <Text style={styles.value}>{student.mobile}</Text>
@@ -142,6 +134,7 @@ export default function StudentProfile() {
                 <Text style={styles.label}>Parent (Father)</Text>
                 <Text style={styles.value}>{student.father}</Text>
               </View>
+
               <View>
                 <Text style={styles.label}>Mobile No</Text>
                 <Text style={styles.value}>{student.fatherMobile}</Text>
@@ -161,7 +154,7 @@ export default function StudentProfile() {
         </ScrollView>
       </LinearGradient>
 
-      {/* Digital Card Modal */}
+      {/* DIGITAL CARD MODAL */}
       <Modal visible={showCard} transparent animationType="fade">
         <TouchableOpacity
           activeOpacity={1}
@@ -169,7 +162,9 @@ export default function StudentProfile() {
           onPress={() => setShowCard(false)}
         >
           <View style={styles.digitalCard}>
+            {/* Grey header */}
             <View style={styles.digitalTop}>
+              {/* Watermark */}
               <Image
                 source={require("../assets/images/watermark.png")}
                 style={styles.digitalWatermark}
@@ -199,6 +194,7 @@ export default function StudentProfile() {
         drawerOpen={drawerOpen}
         closeDrawer={closeDrawer}
         drawerAnim={drawerAnim}
+
         router={router}
       />
     </SafeAreaView>

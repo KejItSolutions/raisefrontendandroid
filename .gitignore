@@ -10,6 +10,7 @@ dist/
 web-build/
 expo-env.d.ts
 
+
 # Native
 .kotlin/
 *.orig.*
@@ -43,6 +44,9 @@ app-example
 /ios
 /android
 
+node_modules
+
+
 # dependencies
 node_modules/
 
@@ -57,4 +61,4 @@ web-build/
 .env
 
 # OS
-.DS_Store
+.DS_Store 0bf968f894c0cc3c814e998b2ef5a8c26f6ec2a5
