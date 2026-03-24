@@ -11,8 +11,8 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import DrawerMenu from "./components/DrawerMenu";
-import Header from "./components/Header";
+import DrawerMenu from "../components/DrawerMenu";
+import Header from "../components/Header";
 
 const { width, height } = Dimensions.get("window");
 
@@ -20,13 +20,31 @@ const { width, height } = Dimensions.get("window");
 const scale = (size) => (width / 375) * size;
 
 export default function App() {
+  const router=useRouter();
   const [activeTab, setActiveTab] = useState("navigation");
   const [activeFilter, setActiveFilter] = useState("All Location");
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [showMainCard, setShowMainCard] = useState(true);
 
+   //Drawer
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerAnim = useRef(new Animated.Value(-260)).current;
-  const router = useRouter();
+
+  const openDrawer = () => {
+    setDrawerOpen(true);
+    Animated.timing(drawerAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const closeDrawer = () => {
+    Animated.timing(drawerAnim, {
+      toValue: -260,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => setDrawerOpen(false));
+  };
 
   const filters = [
     { label: "All Location", icon: "location-outline" },
@@ -108,18 +126,17 @@ export default function App() {
 
   return (
     <ScrollView style={styles.container}>
-      <Header openDrawer={() => router.push("/Dashboard")} />
+       <Header openDrawer={openDrawer} />
 
-      <DrawerMenu
-        drawerOpen={drawerOpen}
-        closeDrawer={() => setDrawerOpen(false)}
-        drawerAnim={drawerAnim}
-        router={router}
-      />
+       <DrawerMenu
+          drawerOpen={drawerOpen}
+          closeDrawer={closeDrawer}
+          drawerAnim={drawerAnim}
+        />
 
       <Text style={styles.title}>Map</Text>
 
-      <TouchableOpacity style={styles.backRow}>
+      <TouchableOpacity style={styles.backRow} onPress={() => router.back()}>
         <Ionicons name="arrow-back" size={scale(16)} color="#4F6EF7" />
         <Text style={styles.back}>Back</Text>
       </TouchableOpacity>
@@ -137,7 +154,7 @@ export default function App() {
 
         <TouchableOpacity
           style={activeTab === "tracking" ? styles.activeTab : styles.inactiveTab}
-          onPress={() => setActiveTab("tracking")}
+         onPress={() => router.push("/DrawerMenuScreens/Maps")}
         >
           <Text style={styles.tabText(activeTab === "tracking")}>
             Student tracking
@@ -174,7 +191,7 @@ export default function App() {
       {/* MAP */}
       <View style={styles.map}>
         <ImageBackground
-          source={require("../assets/images/campus.png")}
+          source={require("../../assets/images/campus.png")}
           style={styles.mapImage}
           imageStyle={{ borderRadius: 16 }}
         >
@@ -283,7 +300,8 @@ const styles = StyleSheet.create({
     fontSize: scale(12),
   }),
 
-  filters: { flexDirection: "row", marginBottom: scale(12) },
+  filters: { flexDirection: "row",flexWrap: "wrap"
+, marginBottom: scale(12) },
 
   filter: {
     flex: 1,

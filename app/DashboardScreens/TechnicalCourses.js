@@ -42,7 +42,7 @@ const COURSE_DATA = [
     level: 'Advanced',
     levelColor: COLORS.advanced,
     duration: 'Duration 4 weeks',
-    icon: require('../assets/images/active.png'),
+    icon: require('../../assets/images/active.png'),
   },
   {
     id: '2',
@@ -51,7 +51,7 @@ const COURSE_DATA = [
     level: 'Intermediate',
     levelColor: COLORS.intermediate,
     duration: 'Duration 3 weeks',
-    icon: require('../assets/images/active.png'),
+    icon: require('../../assets/images/active.png'),
   },
   {
     id: '3',
@@ -60,7 +60,7 @@ const COURSE_DATA = [
     level: 'Beginner',
     levelColor: COLORS.beginner,
     duration: 'Duration 5 weeks',
-    icon: require('../assets/images/active.png'),
+    icon: require('../../assets/images/active.png'),
   },
 ];
 
@@ -138,7 +138,7 @@ export default function TechnicalCourses() {
         
         {/* Unified Header - Same as Certification Screen */}
         <View style={styles.headerBox}>
-          <Image source={require('../assets/images/Logo.png')} style={styles.logo} resizeMode="contain" />
+          <Image source={require('../../assets/images/Logo.png')} style={styles.logo} resizeMode="contain" />
           <View style={styles.headerRight}>
             <Bell color="#000" size={wp('6%')} style={{ marginRight: wp('3%') }} />
             <Image source={{ uri: 'https://i.pravatar.cc/150?u=1' }} style={styles.avatar} />

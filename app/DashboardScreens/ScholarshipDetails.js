@@ -36,7 +36,7 @@ export default function ScholarshipScreen() {
 
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState("status");
+  const [activeTab, setActiveTab] = useState("eligible");
 
   // Drawer
   const [drawerOpen, setDrawerOpen] = useState(false);

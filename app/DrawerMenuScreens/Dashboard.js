@@ -108,7 +108,8 @@ return (
     </TouchableOpacity>
 
     {/* Student Progress */}
-    <View style={styles.progressCard}>
+    <TouchableOpacity onPress={()=>router.push("/DashboardScreens/StudentProgressAcademic")}>
+      <View style={styles.progressCard}>
       <Text style={styles.progressTitle}>Student Progress</Text>
 
       <View style={styles.divider} />
@@ -131,6 +132,8 @@ return (
         </View>
       </View>
     </View>
+    </TouchableOpacity>
+    
 
     {/* Account Details */}
     <TouchableOpacity style={styles.accountCard} onPress={()=>router.push("/DashboardScreens/AccountDetails/AccountDetailsAcademic")}>
@@ -253,7 +256,7 @@ marginBottom: 10,
 
 divider: {
 height: 1,
-backgroundColor: "#ECEEF6",
+backgroundColor: "#E5E5EF",
 marginVertical: 15,
 },
 

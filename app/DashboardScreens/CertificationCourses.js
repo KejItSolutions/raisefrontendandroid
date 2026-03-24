@@ -78,10 +78,10 @@ export default function CertificationScreen() {
       style={styles.card}
       onPress={() => {
         if (item.title === 'Technical Courses') {
-          router.push('/TechnicalCourses');
+          router.push('DashboardScreens/TechnicalCourses');
         }
         else if (item.title === 'Design Courses') {
-          router.push('/DesignCourses'); 
+          router.push('DashboardScreens/DesignCourses'); 
         }
       }}
     >
@@ -97,9 +97,9 @@ export default function CertificationScreen() {
   );
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={styles.container}>
       
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <SafeAreaView  edges={['top', 'left', 'right']}>
         {/* <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} /> */}
         
         {/* Drawer Menu */}
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   container: { 
     flex: 1, 
     backgroundColor: COLORS.background, 
-    paddingHorizontal: wp('5%') 
+   padding: wp("5%"),
   },
 
   mainTitle: { 

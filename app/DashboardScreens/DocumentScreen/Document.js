@@ -88,7 +88,7 @@ const Documents = () => {
     <TouchableOpacity
       style={styles.cardContainer}
       activeOpacity={0.7}
-      onPress={() => router.push("/DrawerMenuScreens/DocumentUploads")} 
+      onPress={() => router.push("/DashboardScreens/DocumentScreen/DocumentUploads")} 
     >
       <MaterialCommunityIcons
         name="folder"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -6,11 +6,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Animated,
 } from "react-native";
-
+import Header from "../components/Header";
+import DrawerMenu from "../components/DrawerMenu";
 import { Feather } from "@expo/vector-icons";
 import Svg, { Circle } from "react-native-svg";
-
+import { useRouter } from "expo-router";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 const CircularProgress = ({ percentage, label, value }) => {
@@ -56,6 +58,7 @@ const CircularProgress = ({ percentage, label, value }) => {
 };
 
 export default function StudentProgressAcademic() {
+  const router=useRouter();
   const [activeTab, setActiveTab] = useState("attendance");
 
   const [semester, setSemester] = useState("Sem 01");
@@ -123,12 +126,35 @@ export default function StudentProgressAcademic() {
       status: record?.status,
     });
   }
+// Drawer Menu State
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const drawerAnim = useRef(new Animated.Value(-260)).current;
 
+    const openDrawer = () => {
+    setDrawerOpen(true);
+    Animated.timing(drawerAnim, {
+    toValue: 0,
+    duration: 300,
+    useNativeDriver: true,
+    }).start();
+    };
+
+    const closeDrawer = () => {
+    Animated.timing(drawerAnim, {
+    toValue: -260,
+    duration: 250,
+    useNativeDriver: true,
+    }).start(() => setDrawerOpen(false));
+    };
   return (
     <SafeAreaView style={styles.container}>
+      <Header openDrawer={openDrawer}/>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>Student Progress</Text>
-        <Text style={styles.back}>← Back to Dashboard</Text>
+        <TouchableOpacity onPress={()=>router.back()}>
+          <Text style={styles.back}>← Back to Dashboard</Text>
+        </TouchableOpacity>
+        
 
         {/* TABS */}
 
@@ -407,6 +433,13 @@ export default function StudentProgressAcademic() {
           </>
         )}
       </ScrollView>
+      {/* Drawer Menu */}
+        <DrawerMenu
+          drawerOpen={drawerOpen}
+          closeDrawer={closeDrawer}
+          drawerAnim={drawerAnim}
+          router={router}
+        />
     </SafeAreaView>
   );
 }
